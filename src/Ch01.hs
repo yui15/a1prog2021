@@ -1,3 +1,4 @@
+{-# LANGUAGE TypeApplications #-}
 module Ch01 where
 
 -- 00 "stressed" の逆順
@@ -90,12 +91,25 @@ samplePi :: String
 samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
 
 wordLengths :: String -> [Int]
-wordLengths = undefined . removeCommaAndPeriod
+wordLengths = map length . words . removeCommaAndPeriod
+
+--gonyo :: String -> [Int]
+--gonyo = monyo . words
+
+--monyo :: [String] -> [Int]
+--monyo = map length
+
+{-
+map f リスト
+
+hoge = map toUpper 
+
+-}
 
 removeCommaAndPeriod :: String -> String
-removeCommaAndPeriod = filter isNotCommaOrPeriod
+removeCommaAndPeriod = filter isNotCommaAndNotPeriod
 
-isNotCommaOrPeriod :: Char -> Bool
-isNotCommaOrPeriod ',' = False
-isNotCommaOrPeriod '.' = False
-isNotCommaOrPeriod _   = True
+isNotCommaAndNotPeriod :: Char -> Bool
+isNotCommaAndNotPeriod ',' = False
+isNotCommaAndNotPeriod '.' = False
+isNotCommaAndNotPeriod _   = True
