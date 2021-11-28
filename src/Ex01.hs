@@ -48,7 +48,7 @@ sample1 :: String
 sample1 = "Madam, I'm Madam"
 
 otomojidake :: String -> String
-otomojidake str = filter isLetter
+otomojidake = filter isLetter
 
 komojinisuru :: String -> String
 komojinisuru = map toLower 
