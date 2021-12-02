@@ -28,6 +28,7 @@ dependencies:
 - doctest
 - hspec
 - main-tester
+- containers
 
 library:
   source-dirs: src

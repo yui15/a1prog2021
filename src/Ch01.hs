@@ -1,7 +1,8 @@
-{-# LANGUAGE TypeApplications #-}
 module Ch01 where
 
-import Data.List
+import Data.List ( inits, tails, transpose )
+import Data.Set (Set)
+import qualified Data.Set as Set
 
 -- 00 "stressed" の逆順
 {- |
@@ -146,7 +147,6 @@ nums :: [Int]
 nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
 
 -- 05 N-gram
-
 bigram :: [a] -> [(a,a)]
 bigram xs = zip xs (tail xs)
 
@@ -164,8 +164,30 @@ mojiBigram = bigram text2
 ngram :: Int -> [a] -> [[a]]
 ngram n xs = transpose (map inits (tails xs)) !! n
 
-{-
-["abc"           ["adg"
-,"def"           ,"bdh"
-,"ghi"]          ,"cfi"
--}
+-- 06 集合
+
+str1 :: String
+str1 = "paraparaparadise"
+str2 :: String
+str2 = "paragraph"
+
+xs :: [(Char, Char)]
+xs = bigram str1
+
+ys :: [(Char, Char)]
+ys = bigram str2
+
+_X :: Set (Char, Char)
+_X = Set.fromList xs
+
+_Y :: Set (Char, Char)
+_Y = Set.fromList ys
+
+waXY :: Set (Char, Char)
+waXY = Set.union _X _Y
+
+sekiXY :: Set (Char, Char)
+sekiXY = Set.intersection _X _Y
+
+saXY :: Set (Char, Char)
+saXY = Set.difference _X _Y
