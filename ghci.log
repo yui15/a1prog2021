@@ -1,0 +1,6105 @@
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Lib              ( src/Lib.hs, interpreted )
+Ok, modules loaded: Lib.
+<time>2021-09-30T11:46:45</time>
+>>> :e
+<time>2021-09-30T11:47:54</time>
+   1  -- # 雛形モジュール
+   2  -- このファイルは`stack new`コマンドで自動的に`src/`に挿入されます
+   3  -- 
+   4  -- ## 言語拡張と`module`宣言
+   5  -- 最低限の指定をしてある
+   6  {- |
+   7  module:       Lib
+   8  copyright:    (c) Nobuo Yamashita 2021
+   9  license:      BSD-3
+  10  maintainer:   nobsun@sampou.org
+  11  stability:    experimental
+  12  -}
+  13  {-# LANGUAGE BangPatterns #-}
+  14  {-# LANGUAGE LambdaCase #-}
+  15  {-# LANGUAGE MultiWayIf #-}
+  16  {-# LANGUAGE OverloadedStrings #-}
+  17  {-# LANGUAGE ScopedTypeVariables #-}
+  18  module Lib
+  19      ( someFunc
+  20      ) where
+  21  
+  22  -- ## `doctest`のための記述と定義本体
+  23  -- テストは失敗するように書いてある
+  24  
+  25  {- | 
+  26  「なんか関数」を標準出力に印字する
+  27  >>> someFunc
+  28  なんか関数
+  29  -}
+  30  someFunc :: IO ()
+  31  someFunc = putStrLn "なんか函数"
+Ok, modules loaded: Lib.
+<time>2021-09-30T11:47:55</time>
+Leaving GHCi.
+<time>2021-09-30T11:48:40</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-10-07T11:24:42</time>
+>>> ans00
+<time>2021-10-07T11:26:21</time>
+
+<interactive>:1:1: error: Variable not in scope: ans00
+<time>2021-10-07T11:26:21</time>
+>>> :l
+<time>2021-10-07T11:27:57</time>
+Ok, modules loaded: none.
+<time>2021-10-07T11:27:57</time>
+>>> :e src/Ch01.hs
+<time>2021-10-07T11:28:23</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = undefined 
+Ok, modules loaded: none.
+<time>2021-10-07T11:28:23</time>
+>>> :l src/Ch01.hs
+<time>2021-10-07T11:28:23</time>
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:28:23</time>
+>>> ans00
+<time>2021-10-07T11:29:44</time>
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at src/Ch01.hs:5:9 in main:Ch01
+<time>2021-10-07T11:29:44</time>
+>>> ;t ans00
+<time>2021-10-07T11:31:50</time>
+
+<interactive>:6:2: error:
+    Parse error: module header, import declaration
+    or top-level declaration expected.
+<time>2021-10-07T11:31:50</time>
+>>> :t ans00
+<time>2021-10-07T11:31:57</time>
+ans00 :: String
+<time>2021-10-07T11:31:57</time>
+>>> :i reverse
+<time>2021-10-07T11:34:58</time>
+reverse :: [a] -> [a] 	-- Defined in ‘GHC.List’
+<time>2021-10-07T11:34:58</time>
+>>> reverse
+<time>2021-10-07T11:36:39</time>
+
+<interactive>:9:1: error:
+    • No instance for (Show ([a0] -> [a0]))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-10-07T11:36:39</time>
+>>> reverse [1,2,3]
+<time>2021-10-07T11:36:58</time>
+[3,2,1]
+<time>2021-10-07T11:36:58</time>
+>>> ['a','b','c']
+<time>2021-10-07T11:38:16</time>
+"abc"
+<time>2021-10-07T11:38:16</time>
+>>> reverse "abc"
+<time>2021-10-07T11:39:05</time>
+"cba"
+<time>2021-10-07T11:39:05</time>
+>>> :e
+<time>2021-10-07T11:39:22</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:39:22</time>
+>>> ans00
+<time>2021-10-07T11:39:51</time>
+"desserts"
+<time>2021-10-07T11:39:52</time>
+>>> :e
+<time>2021-10-07T11:44:33</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+   6  
+   7  omake00 :: String
+   8  omake00= "たけやぶやけた"
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:44:33</time>
+>>> omake00
+<time>2021-10-07T11:44:40</time>
+"たけやぶやけた"
+<time>2021-10-07T11:44:40</time>
+>>> :e
+<time>2021-10-07T11:45:18</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+   6  
+   7  omake00 :: String
+   8  omake00= "たけやぶやけたぞ"
+   9  
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:45:18</time>
+>>> omake00
+<time>2021-10-07T11:45:21</time>
+"たけやぶやけたぞ"
+<time>2021-10-07T11:45:21</time>
+>>> :e
+<time>2021-10-07T11:45:47</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+   6  
+   7  omake00 :: String
+   8  omake00 = reverse "たけやぶやけたぞ"
+   9  
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:45:47</time>
+>>> omake00
+<time>2021-10-07T11:45:52</time>
+"ぞたけやぶやけた"
+<time>2021-10-07T11:45:52</time>
+>>> :e
+<time>2021-10-07T11:58:36</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+   6  
+   7  omake00 :: String
+   8  omake00 = reverse "たけやぶやけたぞ"
+   9  
+  10  -- 01 パタトクカシーー
+  11  ans01 :: String
+  12  ans01 =  takeOdds "パタトカクシーー"
+  13  
+  14  takeOdds :: String -> String
+  15  takeOdds [] = ""
+  16  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:58:36</time>
+>>> ans01
+<time>2021-10-07T11:58:58</time>
+"パトクー"
+<time>2021-10-07T11:58:58</time>
+>>> :e
+<time>2021-10-07T11:59:34</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  ans00 :: String
+   5  ans00 = reverse "stressed"
+   6  
+   7  omake00 :: String
+   8  omake00 = reverse "たけやぶやけたぞ"
+   9  
+  10  -- 01 パタトクカシーー
+  11  ans01 :: String
+  12  ans01 =  takeOdds "パタトクカシーー"
+  13  
+  14  takeOdds :: String -> String
+  15  takeOdds [] = ""
+  16  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-07T11:59:34</time>
+>>> ans01
+<time>2021-10-07T11:59:36</time>
+"パトカー"
+<time>2021-10-07T11:59:36</time>
+Leaving GHCi.
+<time>2021-10-07T12:02:16</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-10-07T12:12:03</time>
+Leaving GHCi.
+<time>2021-10-07T12:12:09</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-14T11:49:49</time>
+>>> takeEven ""A
+<time>2021-10-14T11:50:15</time>
+
+<interactive>:1:1: error:
+    • Variable not in scope: takeEven :: t1 -> t0 -> t
+    • Perhaps you meant ‘takeEvens’ (line 37)
+
+<interactive>:1:12: error: Data constructor not in scope: A
+<time>2021-10-14T11:50:15</time>
+>>> takeEvens　"ぱたとくかしーー"
+<time>2021-10-14T11:51:15</time>
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at src/Ch01.hs:38:20 in main:Ch01
+<time>2021-10-14T11:51:15</time>
+>>> takeOdds　"ぱたとくかしーー"
+<time>2021-10-14T11:51:41</time>
+"ぱとかー"
+<time>2021-10-14T11:51:41</time>
+>>> putStrLn it
+<time>2021-10-14T11:51:55</time>
+ぱとかー
+<time>2021-10-14T11:51:55</time>
+>>> :e
+<time>2021-10-14T12:01:14</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  {- |
+   5  >>> ans00
+   6  "desserts"
+   7  -}
+   8  ans00 :: String
+   9  ans00 = reverse "stressed"
+  10  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  11  {- |
+  12  >>> putStrLn omake00
+  13  ぞたけやぶやけた
+  14  -}
+  15  omake00 :: String
+  16  omake00 = reverse "たけやぶやけたぞ"
+  17  
+  18  -- 01. パタトクカシーー
+  19  ans01 :: String
+  20  ans01 =  takeOdds "パタトクカシーー"
+  21  
+  22  {- | 文字列から奇数番目の文字だけとりだす
+  23  >>> putStrLn (takeOdds "パタトクカシーー")
+  24  パトカー
+  25  >>> putStrLn (takeOdds "hogehoge")
+  26  hghg
+  27  -}
+  28  takeOdds :: [a] -> [a]
+  29  takeOdds []     = []
+  30  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  31  
+  32  {- | リストから偶数番目の要素だけとりだす
+  33  >>> putStrLn (takeEvens "パタトクカシーー")
+  34  タクシー
+  35  -}
+  36  takeEvens :: [a] -> [a]
+  37  takeEvens []         = []
+  38  takeEvens (c:[])     = []
+  39  takeEvens (c:(d:ds)) = d : takeEvens (drop 1 ds)
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-14T12:01:14</time>
+Leaving GHCi.
+<time>2021-10-14T12:01:35</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-14T12:08:37</time>
+>>> :e
+<time>2021-10-14T12:10:00</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  {- |
+   5  >>> ans00
+   6  "desserts"
+   7  -}
+   8  ans00 :: String
+   9  ans00 = reverse "stressed"
+  10  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  11  {- |
+  12  >>> putStrLn omake00
+  13  ぞたけやぶやけた
+  14  -}
+  15  omake00 :: String
+  16  omake00 = reverse "たけやぶやけたぞ"
+  17  
+  18  -- 01. パタトクカシーー
+  19  ans01 :: String
+  20  ans01 =  takeOdds "パタトクカシーー"
+  21  
+  22  {- | 文字列から奇数番目の文字だけとりだす
+  23  >>> putStrLn (takeOdds "パタトクカシーー")
+  24  パトカー
+  25  >>> putStrLn (takeOdds "hogehoge")
+  26  hghg
+  27  -}
+  28  takeOdds :: [a] -> [a]
+  29  takeOdds []     = []
+  30  takeOdds (c:cs) = c : takeEvens cs
+  31  
+  32  {- | リストから偶数番目の要素だけとりだす
+  33  >>> putStrLn (takeEvens "パタトクカシーー")
+  34  タクシー
+  35  -}
+  36  takeEvens :: [a] -> [a]
+  37  takeEvens []     = []
+  38  takeEvens (c:cs) = takeOdds cs
+  39  -- takeEvens (c:[])     = []
+  40  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  41  
+  42  sample :: String
+  43  sample = "パタトクカシーー"
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-14T12:10:00</time>
+>>> takeOdds sample
+<time>2021-10-14T12:10:09</time>
+"パトカー"
+<time>2021-10-14T12:10:09</time>
+>>> takeEvens sample
+<time>2021-10-14T12:10:15</time>
+"タクシー"
+<time>2021-10-14T12:10:15</time>
+Leaving GHCi.
+<time>2021-10-14T12:13:27</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-10-21T11:03:16</time>
+>>> :e src/Ch01.hs
+<time>2021-10-21T11:03:36</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  {- |
+   5  >>> ans00
+   6  "desserts"
+   7  -}
+   8  ans00 :: String
+   9  ans00 = reverse "stressed"
+  10  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  11  {- |
+  12  >>> putStrLn omake00
+  13  ぞたけやぶやけた
+  14  -}
+  15  omake00 :: String
+  16  omake00 = reverse "たけやぶやけたぞ"
+  17  
+  18  -- 01. パタトクカシーー
+  19  ans01 :: String
+  20  ans01 =  takeOdds "パタトクカシーー"
+  21  
+  22  {- | 文字列から奇数番目の文字だけとりだす
+  23  >>> putStrLn (takeOdds "パタトクカシーー")
+  24  パトカー
+  25  >>> putStrLn (takeOdds "hogehoge")
+  26  hghg
+  27  -}
+  28  takeOdds :: [a] -> [a]
+  29  takeOdds []     = []
+  30  takeOdds (c:cs) = c : takeEvens cs
+  31  
+  32  {- | リストから偶数番目の要素だけとりだす
+  33  >>> putStrLn (takeEvens "パタトクカシーー")
+  34  タクシー
+  35  -}
+  36  takeEvens :: [a] -> [a]
+  37  takeEvens []     = []
+  38  takeEvens (c:cs) = takeOdds cs
+  39  -- takeEvens (c:[])     = []
+  40  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  41  
+  42  sample :: String
+  43  sample = "パタトクカシーー"
+  44  
+  45  -- 02
+  46  {- |
+  47  >>> interleave "パトカー" "タクシー"
+  48  "パタトクカシーー"
+  49  -}
+  50  interleave :: [a] -> [a] -> [a]
+  51  interleave []     ys = []
+  52  interleave (x:xs) ys = x : interleave ys xs
+Ok, modules loaded: none.
+<time>2021-10-21T11:03:36</time>
+>>> :load src/Ch01.hs
+<time>2021-10-21T11:03:36</time>
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-21T11:03:36</time>
+>>> interleave "パトカー" "タクシー"
+<time>2021-10-21T11:04:37</time>
+"パタトクカシーー"
+<time>2021-10-21T11:04:37</time>
+>>> interleave "はれ" " あめ"
+<time>2021-10-21T11:20:52</time>
+"は れあ"
+<time>2021-10-21T11:20:52</time>
+>>> interleave "はれ" "あめ"
+<time>2021-10-21T11:21:16</time>
+"はあれめ"
+<time>2021-10-21T11:21:16</time>
+>>> takeOdds it
+<time>2021-10-21T11:21:40</time>
+"はれ"
+<time>2021-10-21T11:21:40</time>
+>>> takeEvens "はあれめ"
+<time>2021-10-21T11:22:07</time>
+"あめ"
+<time>2021-10-21T11:22:07</time>
+Leaving GHCi.
+<time>2021-10-21T11:22:42</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-10-21T11:56:17</time>
+>>> :e src/Ch01.hs
+<time>2021-10-21T11:58:05</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  {- |
+   5  >>> ans00
+   6  "desserts"
+   7  -}
+   8  ans00 :: String
+   9  ans00 = reverse "stressed"
+  10  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  11  {- |
+  12  >>> putStrLn omake00
+  13  ぞたけやぶやけた
+  14  -}
+  15  omake00 :: String
+  16  omake00 = reverse "たけやぶやけたぞ"
+  17  
+  18  -- 01. パタトクカシーー
+  19  ans01 :: String
+  20  ans01 =  takeOdds "パタトクカシーー"
+  21  
+  22  {- | 文字列から奇数番目の文字だけとりだす
+  23  >>> putStrLn (takeOdds "パタトクカシーー")
+  24  パトカー
+  25  >>> putStrLn (takeOdds "hogehoge")
+  26  hghg
+  27  -}
+  28  takeOdds :: [a] -> [a]
+  29  takeOdds []     = []
+  30  takeOdds (c:cs) = c : takeEvens cs
+  31  
+  32  {- | リストから偶数番目の要素だけとりだす
+  33  >>> putStrLn (takeEvens "パタトクカシーー")
+  34  タクシー
+  35  -}
+  36  takeEvens :: [a] -> [a]
+  37  takeEvens []     = []
+  38  takeEvens (c:cs) = takeOdds cs
+  39  -- takeEvens (c:[])     = []
+  40  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  41  
+  42  sample :: String
+  43  sample = "パタトクカシーー"
+  44  
+  45  -- 02
+  46  {- |
+  47  >>> putStr $ interleave "パトカー" "タクシー"
+  48  パタトクカシーー
+  49  -}
+  50  interleave :: [a] -> [a] -> [a]
+  51  interleave []     ys = []                   -- (1)
+  52  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  53  {- 
+  54  interleave "はれ" "あめ"
+  55  = {"はれ" = 'は':"れ"}
+  56  interleave ('は' :"れ") "あめ"
+  57  = {(2)}
+  58  'は' : interleave "あめ" "れ"
+  59  = {"あめ" = 'あ':"め"}
+  60  'は' : interleave ('あ':"め") "れ"
+  61  = {(2)}
+  62  'は' : ('あ' =interleave "れ"　"め")
+  63  = {"れ" = 'れ': []}
+  64  'は' : ('あ' : interleave ('れ':[]) "め")
+  65  ={(2)}
+  66  'は' : ('あ' : ('れ' : interleave "め"[])
+  67  =
+  68  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  69  =
+  70  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  71  ={(1)}
+  72  'は' : ('あ' : ('れ' : ('め' : [])))
+  73  =
+  74  'は' ; ('あ' ; ('れ' : "め"))
+  75  =
+  76  'は' : ('あ' : "れめ")
+  77  =
+  78  'は' : "あれめ"
+  79  =
+  80  "はあれめ"
+  81  -}
+  82  
+  83  -- 03 円周率
+  84  {-
+  85  1. '.'と'.'を除く removeCommaAndPerild
+  86  2. 単語に分ける words
+  87  3. 各単語の長さを求める関数lengthを適用
+  88  -}
+  89  samplePi :: string
+  90  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  91  wordLengths :: String -> [Int]
+  92  wordLengths = undefined
+  93  
+  94  removeCommaAndPeriod :: string -> string
+  95  removeCommaAndPeirod = filter isNotCommaOrPeriod
+  96  
+  97  isNotCommaOrperiod :: Char -> Bool
+  98  isNotCommaOrPeriod ',' = False
+  99  isNotCommaOrPeriod '.' = False
+ 100  isNotCommaOrPeriod _   = True
+Ok, modules loaded: none.
+<time>2021-10-21T11:58:05</time>
+>>> :load src/Ch01.hs
+<time>2021-10-21T11:58:05</time>
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+
+src/Ch01.hs:94:1: error:
+    The type signature for ‘removeCommaAndPeriod’
+      lacks an accompanying binding
+      Perhaps you meant ‘removeCommaAndPeirod’ (Defined at src/Ch01.hs:95:1)
+   |
+94 | removeCommaAndPeriod :: string -> string
+   | ^^^^^^^^^^^^^^^^^^^^
+
+src/Ch01.hs:97:1: error:
+    The type signature for ‘isNotCommaOrperiod’
+      lacks an accompanying binding
+      Perhaps you meant ‘isNotCommaOrPeriod’ (Defined at src/Ch01.hs:98:1)
+   |
+97 | isNotCommaOrperiod :: Char -> Bool
+   | ^^^^^^^^^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-10-21T11:58:05</time>
+>>> :e src/Ch01.hs
+<time>2021-10-21T12:19:33</time>
+   1  module Ch01 where
+   2  
+   3  -- 00 "stressed" の逆順
+   4  {- |
+   5  >>> ans00
+   6  "desserts"
+   7  -}
+   8  ans00 :: String
+   9  ans00 = reverse "stressed"
+  10  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  11  {- |
+  12  >>> putStrLn omake00
+  13  ぞたけやぶやけた
+  14  -}
+  15  omake00 :: String
+  16  omake00 = reverse "たけやぶやけたぞ"
+  17  
+  18  -- 01. パタトクカシーー
+  19  ans01 :: String
+  20  ans01 =  takeOdds "パタトクカシーー"
+  21  
+  22  {- | 文字列から奇数番目の文字だけとりだす
+  23  >>> putStrLn (takeOdds "パタトクカシーー")
+  24  パトカー
+  25  >>> putStrLn (takeOdds "hogehoge")
+  26  hghg
+  27  -}
+  28  takeOdds :: [a] -> [a]
+  29  takeOdds []     = []
+  30  takeOdds (c:cs) = c : takeEvens cs
+  31  
+  32  {- | リストから偶数番目の要素だけとりだす
+  33  >>> putStrLn (takeEvens "パタトクカシーー")
+  34  タクシー
+  35  -}
+  36  takeEvens :: [a] -> [a]
+  37  takeEvens []     = []
+  38  takeEvens (c:cs) = takeOdds cs
+  39  -- takeEvens (c:[])     = []
+  40  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  41  
+  42  sample :: String
+  43  sample = "パタトクカシーー"
+  44  
+  45  -- 02
+  46  {- |
+  47  >>> putStr $ interleave "パトカー" "タクシー"
+  48  パタトクカシーー
+  49  -}
+  50  interleave :: [a] -> [a] -> [a]
+  51  interleave []     ys = []                   -- (1)
+  52  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  53  {- 
+  54  interleave "はれ" "あめ"
+  55  = {"はれ" = 'は':"れ"}
+  56  interleave ('は' :"れ") "あめ"
+  57  = {(2)}
+  58  'は' : interleave "あめ" "れ"
+  59  = {"あめ" = 'あ':"め"}
+  60  'は' : interleave ('あ':"め") "れ"
+  61  = {(2)}
+  62  'は' : ('あ' =interleave "れ"　"め")
+  63  = {"れ" = 'れ': []}
+  64  'は' : ('あ' : interleave ('れ':[]) "め")
+  65  ={(2)}
+  66  'は' : ('あ' : ('れ' : interleave "め"[])
+  67  =
+  68  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  69  =
+  70  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  71  ={(1)}
+  72  'は' : ('あ' : ('れ' : ('め' : [])))
+  73  =
+  74  'は' ; ('あ' ; ('れ' : "め"))
+  75  =
+  76  'は' : ('あ' : "れめ")
+  77  =
+  78  'は' : "あれめ"
+  79  =
+  80  "はあれめ"
+  81  -}
+  82  
+  83  -- 03 円周率
+  84  {-
+  85  1. '.'と'.'を除く removeCommaAndPerild
+  86  2. 単語に分ける words
+  87  3. 各単語の長さを求める関数lengthを適用
+  88  -}
+  89  samplePi :: String
+  90  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  91  
+  92  wordLengths :: String -> [Int]
+  93  wordLengths = undefined . removeCommaAndPeriod
+  94  
+  95  removeCommaAndPeriod :: String -> String
+  96  removeCommaAndPeriod = filter isNotCommaOrPeriod
+  97  
+  98  isNotCommaOrPeriod :: Char -> Bool
+  99  isNotCommaOrPeriod ',' = False
+ 100  isNotCommaOrPeriod '.' = False
+ 101  isNotCommaOrPeriod _   = True
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-21T12:19:33</time>
+>>> :load src/Ch01.hs
+<time>2021-10-21T12:19:33</time>
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-21T12:19:33</time>
+Leaving GHCi.
+<time>2021-10-21T12:19:40</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-28T10:58:14</time>
+>>> :type
+<time>2021-10-28T10:59:00</time>
+
+<no location info>: error: not an expression: ‘’
+<time>2021-10-28T10:59:00</time>
+>>> :type words
+<time>2021-10-28T10:59:25</time>
+words :: String -> [String]
+<time>2021-10-28T10:59:25</time>
+>>> words "Hello world"
+<time>2021-10-28T11:00:33</time>
+["Hello","world"]
+<time>2021-10-28T11:00:33</time>
+>>> :type filter
+<time>2021-10-28T11:03:12</time>
+filter :: (a -> Bool) -> [a] -> [a]
+<time>2021-10-28T11:03:12</time>
+>>> import Date.Char
+<time>2021-10-28T11:05:45</time>
+
+<no location info>: error:
+    Could not find module ‘Date.Char’
+    Perhaps you meant Data.Char (from base-4.14.1.0)
+<time>2021-10-28T11:05:45</time>
+>>> import Data.Char
+<time>2021-10-28T11:06:04</time>
+
+<time>2021-10-28T11:06:04</time>
+>>> :t isUpper
+<time>2021-10-28T11:06:33</time>
+isUpper :: Char -> Bool
+<time>2021-10-28T11:06:33</time>
+>>> isUpper 'A'
+<time>2021-10-28T11:07:32</time>
+True
+<time>2021-10-28T11:07:32</time>
+>>> isUpper 'a'
+<time>2021-10-28T11:07:40</time>
+False
+<time>2021-10-28T11:07:40</time>
+>>> isUpper '1'
+<time>2021-10-28T11:07:52</time>
+False
+<time>2021-10-28T11:07:52</time>
+>>> isLower'a'
+<time>2021-10-28T11:09:56</time>
+
+<interactive>:11:1: error:
+    • Variable not in scope: isLower'a'
+    • Perhaps you meant ‘isLower’ (imported from Data.Char)
+<time>2021-10-28T11:09:56</time>
+>>> isLower 'a'
+<time>2021-10-28T11:10:15</time>
+True
+<time>2021-10-28T11:10:15</time>
+>>> isLower 'A'
+<time>2021-10-28T11:10:52</time>
+False
+<time>2021-10-28T11:10:52</time>
+>>> isLower '1'
+<time>2021-10-28T11:11:01</time>
+False
+<time>2021-10-28T11:11:01</time>
+>>> isLower 'あ'
+<time>2021-10-28T11:11:11</time>
+False
+<time>2021-10-28T11:11:11</time>
+>>> samplePi
+<time>2021-10-28T11:18:27</time>
+"Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+<time>2021-10-28T11:18:27</time>
+>>> removeCommaAndPeriod samplePi
+<time>2021-10-28T11:19:32</time>
+"Now I need a drink alcoholic of course after the heavy lectures involving quantum mechanics"
+<time>2021-10-28T11:19:32</time>
+>>> :t length
+<time>2021-10-28T11:31:48</time>
+length :: Foldable t => t a -> Int
+<time>2021-10-28T11:31:49</time>
+>>> length :: [a] -> Int
+<time>2021-10-28T11:32:43</time>
+
+<interactive>:19:1: error:
+    • No instance for (Show ([a0] -> Int))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-10-28T11:32:43</time>
+>>> :t map
+<time>2021-10-28T11:34:33</time>
+map :: (a -> b) -> [a] -> [b]
+<time>2021-10-28T11:34:33</time>
+>>> :e
+<time>2021-10-28T11:38:43</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = gonyo . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  monyo :: [String] -> [Int]
+ 100  monyo = map length
+ 101  
+ 102  removeCommaAndPeriod :: String -> String
+ 103  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 104  
+ 105  isNotCommaAndNotPeriod :: Char -> Bool
+ 106  isNotCommaAndNotPeriod ',' = False
+ 107  isNotCommaAndNotPeriod '.' = False
+ 108  isNotCommaAndNotPeriod _   = True
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+
+src/Ch01.hs:94:15: error:
+    • Variable not in scope: gonyo :: String -> [Int]
+    • Perhaps you meant ‘monyo’ (line 100)
+   |
+94 | wordLengths = gonyo . removeCommaAndPeriod
+   |               ^^^^^
+Failed, modules loaded: none.
+<time>2021-10-28T11:38:43</time>
+>>> :set -XTypeApplications
+<time>2021-10-28T11:40:07</time>
+
+<time>2021-10-28T11:40:07</time>
+>>> :t length @[]
+<time>2021-10-28T11:40:21</time>
+length @[] :: [a] -> Int
+<time>2021-10-28T11:40:21</time>
+>>> :t map length
+<time>2021-10-28T11:42:15</time>
+map length :: Foldable t => [t a] -> [Int]
+<time>2021-10-28T11:42:15</time>
+>>> :t map (length @[])
+<time>2021-10-28T11:43:37</time>
+map (length @[]) :: [[a]] -> [Int]
+<time>2021-10-28T11:43:37</time>
+>>> :t toUpper
+<time>2021-10-28T11:45:41</time>
+toUpper :: Char -> Char
+<time>2021-10-28T11:45:41</time>
+>>> hoge = map toUpper
+<time>2021-10-28T11:45:59</time>
+
+<time>2021-10-28T11:45:59</time>
+>>> hoge "abc"
+<time>2021-10-28T11:46:10</time>
+"ABC"
+<time>2021-10-28T11:46:10</time>
+>>> hoge "Abe123"
+<time>2021-10-28T11:46:27</time>
+"ABE123"
+<time>2021-10-28T11:46:27</time>
+>>> :t map
+<time>2021-10-28T11:49:22</time>
+map :: (a -> b) -> [a] -> [b]
+<time>2021-10-28T11:49:22</time>
+>>> :e
+<time>2021-10-28T11:50:34</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = monyo . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  monyo :: [String] -> [Int]
+ 100  monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-10-28T11:50:34</time>
+>>> wordLength samplePi
+<time>2021-10-28T11:51:05</time>
+
+<interactive>:32:1: error:
+    • Variable not in scope: wordLength :: String -> t
+    • Perhaps you meant ‘wordLengths’ (line 94)
+<time>2021-10-28T11:51:05</time>
+>>> wordLength samplePi
+<time>2021-10-28T11:51:35</time>
+
+<interactive>:33:1: error:
+    • Variable not in scope: wordLength :: String -> t
+    • Perhaps you meant ‘wordLengths’ (line 94)
+<time>2021-10-28T11:51:35</time>
+>>> wordLengths samplePi
+<time>2021-10-28T11:51:58</time>
+[3,1,4,1,5,9,2,6,5,3,5,8,9,7,9]
+<time>2021-10-28T11:51:58</time>
+>>> :q
+<time>2021-10-28T11:55:17</time>
+Leaving GHCi.
+<time>2021-10-28T11:55:17</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Warning: ignoring unrecognised input `src/Ex01.ha'
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-11-04T11:11:00</time>
+>>> :q
+<time>2021-11-04T11:11:09</time>
+Leaving GHCi.
+<time>2021-11-04T11:11:09</time>
+GHCi, version 8.10.4: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-04T11:11:21</time>
+>>> :t ord
+<time>2021-11-04T11:11:29</time>
+ord :: Char -> Int
+<time>2021-11-04T11:11:29</time>
+>>> ord 'A'
+<time>2021-11-04T11:11:49</time>
+65
+<time>2021-11-04T11:11:49</time>
+>>> :t chr
+<time>2021-11-04T11:12:08</time>
+chr :: Int -> Char
+<time>2021-11-04T11:12:08</time>
+>>> chr 65
+<time>2021-11-04T11:12:19</time>
+'A'
+<time>2021-11-04T11:12:19</time>
+>>> chr (65+32)
+<time>2021-11-04T11:13:07</time>
+'a'
+<time>2021-11-04T11:13:07</time>
+>>> :t toUpper
+<time>2021-11-04T11:13:59</time>
+toUpper :: Char -> Char
+<time>2021-11-04T11:13:59</time>
+>>> tou
+<time>2021-11-04T11:14:06</time>
+
+<interactive>:7:1: error: Variable not in scope: tou
+<time>2021-11-04T11:14:06</time>
+>>> toUpper 'a'
+<time>2021-11-04T11:14:31</time>
+'A'
+<time>2021-11-04T11:14:31</time>
+>>> toUpper 'A'
+<time>2021-11-04T11:14:50</time>
+'A'
+<time>2021-11-04T11:14:50</time>
+>>> toUpper '2'
+<time>2021-11-04T11:15:04</time>
+'2'
+<time>2021-11-04T11:15:04</time>
+>>> :t toLower
+<time>2021-11-04T11:15:36</time>
+toLower :: Char -> Char
+<time>2021-11-04T11:15:36</time>
+>>> toLower 'A'
+<time>2021-11-04T11:15:47</time>
+'a'
+<time>2021-11-04T11:15:47</time>
+>>> toLower 'a'
+<time>2021-11-04T11:15:54</time>
+'a'
+<time>2021-11-04T11:15:54</time>
+>>> toLower '1'
+<time>2021-11-04T11:16:30</time>
+'1'
+<time>2021-11-04T11:16:30</time>
+>>> toLower 'Σ'
+<time>2021-11-04T11:19:14</time>
+'σ'
+<time>2021-11-04T11:19:14</time>
+>>> toUpper 'λ'
+<time>2021-11-04T11:19:38</time>
+'Λ'
+<time>2021-11-04T11:19:38</time>
+>>> ord 'λ'
+<time>2021-11-04T11:21:14</time>
+955
+<time>2021-11-04T11:21:14</time>
+>>> ord 'Σ'
+<time>2021-11-04T11:21:31</time>
+931
+<time>2021-11-04T11:21:31</time>
+>>> :i Char
+<time>2021-11-04T11:23:56</time>
+type Char :: *
+data Char = GHC.Types.C# GHC.Prim.Char#
+  	-- Defined in ‘GHC.Types’
+instance Eq Char -- Defined in ‘GHC.Classes’
+instance Ord Char -- Defined in ‘GHC.Classes’
+instance Enum Char -- Defined in ‘GHC.Enum’
+instance Show Char -- Defined in ‘GHC.Show’
+instance Bounded Char -- Defined in ‘GHC.Enum’
+instance Read Char -- Defined in ‘GHC.Read’
+<time>2021-11-04T11:23:56</time>
+>>> chr (minBound :: Char)
+<time>2021-11-04T11:30:54</time>
+
+<interactive>:20:6: error:
+    • Couldn't match expected type ‘Int’ with actual type ‘Char’
+    • In the first argument of ‘chr’, namely ‘(minBound :: Char)’
+      In the expression: chr (minBound :: Char)
+      In an equation for ‘it’: it = chr (minBound :: Char)
+<time>2021-11-04T11:30:55</time>
+>>> ord (minBound :: Char)
+<time>2021-11-04T11:31:08</time>
+0
+<time>2021-11-04T11:31:08</time>
+>>> chr 0
+<time>2021-11-04T11:31:39</time>
+'\NUL'
+<time>2021-11-04T11:31:39</time>
+>>> ord (maxBound :: Char)
+<time>2021-11-04T11:32:22</time>
+1114111
+<time>2021-11-04T11:32:22</time>
+>>> :q
+<time>2021-11-04T11:42:14</time>
+Leaving GHCi.
+<time>2021-11-04T11:42:14</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-04T11:56:38</time>
+>>> generalCategory '('
+<time>2021-11-04T11:56:53</time>
+OpenPunctuation
+<time>2021-11-04T11:56:53</time>
+>>> generalCategory ')'
+<time>2021-11-04T11:56:59</time>
+ClosePunctuation
+<time>2021-11-04T11:56:59</time>
+>>> generalCategory '<'
+<time>2021-11-04T11:57:08</time>
+MathSymbol
+<time>2021-11-04T11:57:08</time>
+>>> generalCategory '>'
+<time>2021-11-04T11:57:17</time>
+MathSymbol
+<time>2021-11-04T11:57:17</time>
+>>> generalCategory '['
+<time>2021-11-04T11:57:29</time>
+OpenPunctuation
+<time>2021-11-04T11:57:29</time>
+>>> generalCategory '*'
+<time>2021-11-04T11:57:34</time>
+OtherPunctuation
+<time>2021-11-04T11:57:34</time>
+>>> generalCategory '~'
+<time>2021-11-04T11:57:38</time>
+MathSymbol
+<time>2021-11-04T11:57:38</time>
+>>> generalCategory '='
+<time>2021-11-04T11:57:43</time>
+MathSymbol
+<time>2021-11-04T11:57:43</time>
+>>> generalCategory '@'
+<time>2021-11-04T11:57:50</time>
+OtherPunctuation
+<time>2021-11-04T11:57:50</time>
+>>> generalCategory '_'
+<time>2021-11-04T11:57:54</time>
+ConnectorPunctuation
+<time>2021-11-04T11:57:54</time>
+>>> generalCategory 'a'
+<time>2021-11-04T11:58:01</time>
+LowercaseLetter
+<time>2021-11-04T11:58:01</time>
+>>> generalCategory 'A'
+<time>2021-11-04T11:58:07</time>
+UppercaseLetter
+<time>2021-11-04T11:58:07</time>
+>>> generalCategory '、'
+<time>2021-11-04T11:58:15</time>
+OtherPunctuation
+<time>2021-11-04T11:58:15</time>
+>>> generalCategory '.'
+<time>2021-11-04T11:58:29</time>
+OtherPunctuation
+<time>2021-11-04T11:58:29</time>
+>>> "hoge" == "hoge"
+<time>2021-11-04T12:02:55</time>
+True
+<time>2021-11-04T12:02:55</time>
+>>> x = "hoge"
+<time>2021-11-04T12:03:09</time>
+
+<time>2021-11-04T12:03:09</time>
+>>> y = "hoga"
+<time>2021-11-04T12:03:22</time>
+
+<time>2021-11-04T12:03:22</time>
+>>> x == y
+<time>2021-11-04T12:03:26</time>
+False
+<time>2021-11-04T12:03:26</time>
+>>> x == x ++ x
+<time>2021-11-04T12:03:56</time>
+False
+<time>2021-11-04T12:03:56</time>
+>>> "" = ""
+<time>2021-11-04T12:04:47</time>
+
+<time>2021-11-04T12:04:47</time>
+>>> "" == ""
+<time>2021-11-04T12:04:53</time>
+True
+<time>2021-11-04T12:04:53</time>
+>>> :q
+<time>2021-11-04T12:06:24</time>
+Leaving GHCi.
+<time>2021-11-04T12:06:24</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:21:1: error:
+    Duplicate type signatures for ‘palindrome’
+    at src/Ex01.hs:18:1-10
+       src/Ex01.hs:21:1-10
+   |
+21 | palindrome :: String
+   | ^^^^^^^^^^
+
+src/Ex01.hs:22:1: error:
+    Multiple declarations of ‘palindrome’
+    Declared at: src/Ex01.hs:19:1
+                 src/Ex01.hs:22:1
+   |
+22 | palindrome = reverse "たけやぶやけた"
+   | ^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-04T12:07:53</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+target ‘Ex01/hs’ is not a module name or a source file
+<time>2021-11-04T14:05:43</time>
+>>> :q
+<time>2021-11-04T14:05:52</time>
+Leaving GHCi.
+<time>2021-11-04T14:05:52</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+
+<no location info>: error: can't find file: Ex01.hs
+Failed, modules loaded: none.
+<time>2021-11-04T14:06:14</time>
+>>> :q
+<time>2021-11-04T14:06:31</time>
+Leaving GHCi.
+<time>2021-11-04T14:06:31</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+
+<no location info>: error: can't find file: Ex01.hs
+Failed, modules loaded: none.
+<time>2021-11-04T14:15:11</time>
+>>> palindrome
+<time>2021-11-04T14:15:48</time>
+
+<interactive>:1:1: error: Variable not in scope: palindrome
+<time>2021-11-04T14:15:48</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-06T21:02:36</time>
+>>> palindrome
+<time>2021-11-06T21:02:43</time>
+"たけやぶやけた"
+<time>2021-11-06T21:02:43</time>
+>>> palindrome
+<time>2021-11-06T21:02:54</time>
+"たけやぶやけた"
+<time>2021-11-06T21:02:54</time>
+>>> palindrome
+<time>2021-11-06T21:03:01</time>
+"たけやぶやけた"
+<time>2021-11-06T21:03:01</time>
+>>> :i reverse
+<time>2021-11-07T11:22:13</time>
+reverse :: [a] -> [a] 	-- Defined in ‘GHC.List’
+<time>2021-11-07T11:22:14</time>
+>>> :e
+<time>2021-11-07T11:23:42</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  
+  21  palindrome :: String
+  22  palindrome　= reverse "たけやぶやけた"
+  23  
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-07T11:23:42</time>
+>>> palindrome
+<time>2021-11-07T11:23:48</time>
+"たけやぶやけた"
+<time>2021-11-07T11:23:48</time>
+>>> :e
+<time>2021-11-07T11:24:00</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  
+  21  palindrome :: String
+  22  palindrome　= reverse "たけやぶやけたぞ"
+  23  
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-07T11:24:00</time>
+>>> palindrome
+<time>2021-11-07T11:24:04</time>
+"ぞたけやぶやけた"
+<time>2021-11-07T11:24:04</time>
+>>> :e
+<time>2021-11-07T11:37:38</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  
+  21  palindrome :: String　-> Bool
+  22  palindrome "たけやぶやけたぞ" = True
+  23  palindrome _               = False
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-07T11:37:38</time>
+>>> ;alindrome
+<time>2021-11-07T11:37:42</time>
+
+<interactive>:10:2: error:
+    Parse error: module header, import declaration
+    or top-level declaration expected.
+<time>2021-11-07T11:37:42</time>
+>>> palindrome
+<time>2021-11-07T11:37:48</time>
+
+<interactive>:11:1: error:
+    • No instance for (Show (String -> Bool))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-11-07T11:37:48</time>
+>>> reverse "たけやぶやけたぞ"
+<time>2021-11-07T11:41:35</time>
+"ぞたけやぶやけた"
+<time>2021-11-07T11:41:35</time>
+>>> palindrome
+<time>2021-11-07T11:41:42</time>
+
+<interactive>:13:1: error:
+    • No instance for (Show (String -> Bool))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-11-07T11:41:42</time>
+>>> palindroe
+<time>2021-11-07T12:18:50</time>
+
+<interactive>:14:1: error:
+    • Variable not in scope: palindroe
+    • Perhaps you meant ‘palindrome’ (line 22)
+<time>2021-11-07T12:18:50</time>
+>>> palindrome
+<time>2021-11-07T12:18:53</time>
+
+<interactive>:15:1: error:
+    • No instance for (Show (String -> Bool))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-11-07T12:18:53</time>
+>>> :e
+<time>2021-11-07T12:19:01</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String
+  21  palindrome = "たけやぶやけたぞ"
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-07T12:19:01</time>
+>>> palindrome
+<time>2021-11-07T12:19:05</time>
+"たけやぶやけたぞ"
+<time>2021-11-07T12:19:05</time>
+>>> :e
+<time>2021-11-07T12:19:16</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String
+  21  palindrome = reverse "たけやぶやけたぞ"
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-07T12:19:16</time>
+>>> palindrome
+<time>2021-11-07T12:19:19</time>
+"ぞたけやぶやけた"
+<time>2021-11-07T12:19:19</time>
+>>> :i Bool
+<time>2021-11-07T12:20:02</time>
+type Bool :: *
+data Bool = False | True
+  	-- Defined in ‘GHC.Types’
+instance Eq Bool -- Defined in ‘GHC.Classes’
+instance Ord Bool -- Defined in ‘GHC.Classes’
+instance Enum Bool -- Defined in ‘GHC.Enum’
+instance Show Bool -- Defined in ‘GHC.Show’
+instance Read Bool -- Defined in ‘GHC.Read’
+instance Bounded Bool -- Defined in ‘GHC.Enum’
+<time>2021-11-07T12:20:02</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:21:18: error:
+    • Couldn't match expected type ‘Bool’
+                  with actual type ‘[a0] -> [a0]’
+    • Probable cause: ‘reverse’ is applied to too few arguments
+      In the expression: reverse
+      In an equation for ‘palindrome’: palindrome str = reverse
+   |
+21 | palindrome str = reverse
+   |                  ^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-11T10:54:23</time>
+>>> :q
+<time>2021-11-11T10:54:55</time>
+Leaving GHCi.
+<time>2021-11-11T10:54:55</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-11T11:06:01</time>
+>>> 3 == 5
+<time>2021-11-11T11:06:45</time>
+False
+<time>2021-11-11T11:06:45</time>
+>>> 3 ==3
+<time>2021-11-11T11:07:22</time>
+True
+<time>2021-11-11T11:07:22</time>
+>>> "abc" == "abc"
+<time>2021-11-11T11:07:44</time>
+True
+<time>2021-11-11T11:07:44</time>
+>>> "abc" == "abcd"
+<time>2021-11-11T11:07:54</time>
+False
+<time>2021-11-11T11:07:54</time>
+>>> "a" == "a "
+<time>2021-11-11T11:08:05</time>
+False
+<time>2021-11-11T11:08:05</time>
+>>> "abc" == "aBc"
+<time>2021-11-11T11:08:24</time>
+False
+<time>2021-11-11T11:08:24</time>
+>>> "あいうえお" == "かきくけこ"
+<time>2021-11-11T11:09:03</time>
+False
+<time>2021-11-11T11:09:03</time>
+>>> "あいうえお" == "あうおいえ"
+<time>2021-11-11T11:09:36</time>
+False
+<time>2021-11-11T11:09:36</time>
+>>> sample = "あいうえお"
+<time>2021-11-11T11:11:39</time>
+
+<time>2021-11-11T11:11:39</time>
+>>> sample
+<time>2021-11-11T11:11:43</time>
+"あいうえお"
+<time>2021-11-11T11:11:43</time>
+>>> reverse sample
+<time>2021-11-11T11:11:58</time>
+"おえういあ"
+<time>2021-11-11T11:11:58</time>
+>>> palindrome = "たけやぶやけた"
+<time>2021-11-11T11:12:19</time>
+
+<time>2021-11-11T11:12:19</time>
+>>> reverse palindrome
+<time>2021-11-11T11:12:28</time>
+"たけやぶやけた"
+<time>2021-11-11T11:12:28</time>
+>>> :e
+<time>2021-11-11T11:18:37</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  
+  23  {-
+  24  同値性の検査をする演算子　==
+  25  
+  26  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-11T11:18:37</time>
+>>> palindrome "たけやぶやけた"
+<time>2021-11-11T11:18:50</time>
+True
+<time>2021-11-11T11:18:50</time>
+>>> Madam, I'm Adam
+<time>2021-11-11T11:25:27</time>
+
+<interactive>:16:6: error: parse error on input ‘,’
+<time>2021-11-11T11:25:27</time>
+>>> :t generalCategory
+<time>2021-11-11T11:25:43</time>
+generalCategory :: Char -> GeneralCategory
+<time>2021-11-11T11:25:43</time>
+>>> generalCategory 'M'
+<time>2021-11-11T11:26:14</time>
+UppercaseLetter
+<time>2021-11-11T11:26:14</time>
+>>> generalCategory 'm'
+<time>2021-11-11T11:26:33</time>
+LowercaseLetter
+<time>2021-11-11T11:26:33</time>
+>>> generalCategory ' '
+<time>2021-11-11T11:26:46</time>
+Space
+<time>2021-11-11T11:26:46</time>
+>>> map genralCategory
+<time>2021-11-11T11:27:02</time>
+
+<interactive>:21:5: error:
+    • Variable not in scope: genralCategory :: a -> b
+    • Perhaps you meant ‘generalCategory’ (imported from Data.Char)
+<time>2021-11-11T11:27:02</time>
+>>> map genralCategory
+<time>2021-11-11T11:27:05</time>
+
+<interactive>:22:5: error:
+    • Variable not in scope: genralCategory :: a -> b
+    • Perhaps you meant ‘generalCategory’ (imported from Data.Char)
+<time>2021-11-11T11:27:05</time>
+>>> map genralCategory sample
+<time>2021-11-11T11:27:08</time>
+
+<interactive>:23:5: error:
+    • Variable not in scope: genralCategory :: a0 -> b
+    • Perhaps you meant ‘generalCategory’ (imported from Data.Char)
+
+<interactive>:23:20: error: Variable not in scope: sample :: [a0]
+<time>2021-11-11T11:27:08</time>
+>>> map genralCategory sample1
+<time>2021-11-11T11:27:16</time>
+
+<interactive>:24:5: error:
+    • Variable not in scope: genralCategory :: a0 -> b
+    • Perhaps you meant ‘generalCategory’ (imported from Data.Char)
+
+<interactive>:24:20: error: Variable not in scope: sample1 :: [a0]
+<time>2021-11-11T11:27:16</time>
+>>> map generalCategory sample1
+<time>2021-11-11T11:27:28</time>
+
+<interactive>:25:21: error:
+    Variable not in scope: sample1 :: [Char]
+<time>2021-11-11T11:27:28</time>
+>>> :e
+<time>2021-11-11T11:28:27</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  
+  23  sample1 :: String
+  24  sample1 = "Madam, I'm Adam."
+  25  {-
+  26  同値性の検査をする演算子　==
+  27  
+  28  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-11T11:28:27</time>
+>>> map generalCategory sample1
+<time>2021-11-11T11:28:41</time>
+[UppercaseLetter,LowercaseLetter,LowercaseLetter,LowercaseLetter,LowercaseLetter,OtherPunctuation,Space,UppercaseLetter,OtherPunctuation,LowercaseLetter,Space,UppercaseLetter,LowercaseLetter,LowercaseLetter,LowercaseLetter,OtherPunctuation]
+<time>2021-11-11T11:28:41</time>
+>>> :t filter
+<time>2021-11-11T11:31:34</time>
+filter :: (a -> Bool) -> [a] -> [a]
+<time>2021-11-11T11:31:34</time>
+>>> filter isLetter sample1
+<time>2021-11-11T11:34:35</time>
+"MadamImAdam"
+<time>2021-11-11T11:34:35</time>
+>>> filter isLetter sample1
+<time>2021-11-11T11:35:51</time>
+"MadamImAdam"
+<time>2021-11-11T11:35:51</time>
+>>> it
+<time>2021-11-11T11:35:52</time>
+"MadamImAdam"
+<time>2021-11-11T11:35:52</time>
+>>> sample1'
+<time>2021-11-11T11:36:31</time>
+
+<interactive>:32:1: error:
+    • Variable not in scope: sample1'
+    • Perhaps you meant ‘sample1’ (line 24)
+<time>2021-11-11T11:36:31</time>
+>>> sample1' = filter isLetter sample1
+<time>2021-11-11T11:36:53</time>
+
+<time>2021-11-11T11:36:53</time>
+>>> sample1'
+<time>2021-11-11T11:37:03</time>
+"MadamImAdam"
+<time>2021-11-11T11:37:03</time>
+>>> map toLower sample1'
+<time>2021-11-11T11:37:21</time>
+"madamimadam"
+<time>2021-11-11T11:37:21</time>
+>>> palindrome it
+<time>2021-11-11T11:38:05</time>
+True
+<time>2021-11-11T11:38:05</time>
+>>> filter isLetter "たけやぶ やけた?"
+<time>2021-11-11T11:41:54</time>
+"たけやぶやけた"
+<time>2021-11-11T11:41:54</time>
+>>> map isLower it
+<time>2021-11-11T11:42:27</time>
+[False,False,False,False,False,False,False]
+<time>2021-11-11T11:42:27</time>
+>>> map toLower it
+<time>2021-11-11T11:42:59</time>
+
+<interactive>:39:13: error:
+    • Couldn't match type ‘Bool’ with ‘Char’
+      Expected type: [Char]
+        Actual type: [Bool]
+    • In the second argument of ‘map’, namely ‘it’
+      In the expression: map toLower it
+      In an equation for ‘it’: it = map toLower it
+<time>2021-11-11T11:42:59</time>
+>>> filter isLetter "たけやぶ やけた?"
+<time>2021-11-11T11:43:07</time>
+"たけやぶやけた"
+<time>2021-11-11T11:43:07</time>
+>>> map toLower it
+<time>2021-11-11T11:43:19</time>
+"たけやぶやけた"
+<time>2021-11-11T11:43:19</time>
+>>> palindromeKai "たけやぶ やけた?"
+<time>2021-11-11T11:44:25</time>
+
+<interactive>:42:1: error:
+    • Variable not in scope: palindromeKai :: t0 -> t
+    • Perhaps you meant ‘palindrome’ (line 21)
+<time>2021-11-11T11:44:25</time>
+>>> :e
+<time>2021-11-11T11:44:29</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  
+  23  sample1 :: String
+  24  sample1 = "Madam, I'm Adam."
+  25  
+  26  palindromeKai :: String -> Bool
+  27  palindromeKai str = palindrome str'
+  28      where
+  29          str' = filter isLetter str
+  30          str'' = map toLower str'
+  31  
+  32  {-
+  33  同値性の検査をする演算子　==
+  34  
+  35  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-11T11:44:29</time>
+>>> palindromeKai "たけやぶ やけた?"
+<time>2021-11-11T11:44:32</time>
+True
+<time>2021-11-11T11:44:32</time>
+>>> :q
+<time>2021-11-11T11:45:33</time>
+Leaving GHCi.
+<time>2021-11-11T11:45:33</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:23:1: error:
+    Duplicate type signatures for ‘palindrome’
+    at src/Ex01.hs:20:1-10
+       src/Ex01.hs:23:1-10
+   |
+23 | palindrome :: String -> Bool
+   | ^^^^^^^^^^
+
+src/Ex01.hs:24:1: error:
+    Multiple declarations of ‘palindrome’
+    Declared at: src/Ex01.hs:21:1
+                 src/Ex01.hs:24:1
+   |
+24 | palindrome str = undefined
+   | ^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-11T11:47:58</time>
+>>> :q
+<time>2021-11-11T11:48:25</time>
+Leaving GHCi.
+<time>2021-11-11T11:48:25</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Warning: ignoring unrecognised input `.log'
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2021-11-11T11:48:37</time>
+>>> :q
+<time>2021-11-11T11:48:42</time>
+Leaving GHCi.
+<time>2021-11-11T11:48:42</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:23:1: error:
+    Duplicate type signatures for ‘palindrome’
+    at src/Ex01.hs:20:1-10
+       src/Ex01.hs:23:1-10
+   |
+23 | palindrome :: String -> Bool
+   | ^^^^^^^^^^
+
+src/Ex01.hs:24:1: error:
+    Multiple declarations of ‘palindrome’
+    Declared at: src/Ex01.hs:21:1
+                 src/Ex01.hs:24:1
+   |
+24 | palindrome str = undefined
+   | ^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-11T11:49:18</time>
+>>> :q
+<time>2021-11-11T12:00:04</time>
+Leaving GHCi.
+<time>2021-11-11T12:00:04</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-11T12:03:53</time>
+>>> :e
+<time>2021-11-11T12:03:54</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  {- |
+  23  >>> palindromeKai "Madam, I'm Adam."
+  24  True
+  25  >>> palindromeKai "たけやぶ やけた?"
+  26  True
+  27  -}
+  28  sample1 :: String
+  29  sample1 = "Madam, I'm Adam."
+  30  
+  31  palindromeKai :: String -> Bool
+  32  palindromeKai str = palindrome str'
+  33      where
+  34          str' = filter isLetter str
+  35          str'' = map toLower str'
+  36  
+  37  {-
+  38  同値性の検査をする演算子　==
+  39  
+  40  -}
+Ok, modules loaded: Ex01.
+<time>2021-11-11T12:03:54</time>
+>>> :q
+<time>2021-11-11T12:04:56</time>
+Leaving GHCi.
+<time>2021-11-11T12:04:56</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-18T10:55:35</time>
+>>> filter isLetter "Madam, I'm Adam."
+<time>2021-11-18T10:56:10</time>
+"MadamImAdam"
+<time>2021-11-18T10:56:10</time>
+>>> :t map
+<time>2021-11-18T11:08:14</time>
+map :: (a -> b) -> [a] -> [b]
+<time>2021-11-18T11:08:14</time>
+>>> :t toLower
+<time>2021-11-18T11:08:26</time>
+toLower :: Char -> Char
+<time>2021-11-18T11:08:26</time>
+>>> :e
+<time>2021-11-18T11:12:20</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  {- |
+  23  >>> palindromeKai "Madam, I'm Adam."
+  24  True
+  25  >>> palindromeKai "たけやぶ やけた?"
+  26  True
+  27  -}
+  28  palindromeKai :: String -> Bool
+  29  palindromeKai str = palindrome str''
+  30      where
+  31          str' = otomojidake str
+  32          str'' = komojinisuru str'
+  33  
+  34  otomojidake :: String -> String
+  35  otomojidake str = (filter isLetter) str
+  36  
+  37  komojinisuru :: String -> String
+  38  komojinisuru = map toLower 
+  39  
+  40  
+  41  {-
+  42  filter :: (a -> Bool) -> ([a] -> [a])
+  43  map :: (a -> b) -> ([a] -> [b])
+  44  -}
+  45  
+  46  {-
+  47  同値性の検査をする演算子　==
+  48  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-18T11:12:20</time>
+>>> palindrome
+<time>2021-11-18T11:12:29</time>
+
+<interactive>:5:1: error:
+    • No instance for (Show (String -> Bool))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-11-18T11:12:29</time>
+>>> palindromeKai sample1
+<time>2021-11-18T11:12:49</time>
+
+<interactive>:6:15: error: Variable not in scope: sample1 :: String
+<time>2021-11-18T11:12:49</time>
+>>> palindromeKai sample1
+<time>2021-11-18T11:13:13</time>
+
+<interactive>:7:15: error: Variable not in scope: sample1 :: String
+<time>2021-11-18T11:13:13</time>
+>>> palindromeKai sample1
+<time>2021-11-18T11:14:43</time>
+
+<interactive>:8:15: error: Variable not in scope: sample1 :: String
+<time>2021-11-18T11:14:43</time>
+>>> :e
+<time>2021-11-18T11:15:51</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  {- |
+  23  >>> palindromeKai "Madam, I'm Adam."
+  24  True
+  25  >>> palindromeKai "たけやぶ やけた?"
+  26  True
+  27  -}
+  28  palindromeKai :: String -> Bool
+  29  palindromeKai str = palindrome (komojinisuru (otomojidake str))
+  30      where
+  31          str' = otomojidake str
+  32  
+  33  otomojidake :: String -> String
+  34  otomojidake str = (filter isLetter) str
+  35  
+  36  komojinisuru :: String -> String
+  37  komojinisuru = map toLower 
+  38  
+  39  
+  40  {-
+  41  filter :: (a -> Bool) -> ([a] -> [a])
+  42  map :: (a -> b) -> ([a] -> [b])
+  43  -}
+  44  
+  45  {-
+  46  同値性の検査をする演算子　==
+  47  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-18T11:15:51</time>
+>>> palindromeKai sample1
+<time>2021-11-18T11:15:53</time>
+
+<interactive>:10:15: error:
+    Variable not in scope: sample1 :: String
+<time>2021-11-18T11:15:53</time>
+>>> :e
+<time>2021-11-18T11:31:10</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  {- |
+  23  >>> palindromeKai "Madam, I'm Adam."
+  24  True
+  25  >>> palindromeKai "たけやぶ やけた?"
+  26  True
+  27  -}
+  28  palindromeKai :: String -> Bool
+  29  -- palindromeKai str = palindrome (komojinisuru (otomojidake str))
+  30  palindromeKai = palindrome . komojinisuru . (filter isLetter)
+  31  
+  32  {-
+  33  h x = g (f x)
+  34  
+  35          f      g
+  36      (X) -> (Y) -> (Z)
+  37          -------->
+  38              h
+  39  h は f と g を合成したもの
+  40  h :: X -> Z
+  41  f :: X -> Y
+  42  g :: Y -> Z
+  43  
+  44  h = g . f
+  45  -}
+  46  sample1 :: String
+  47  sample1 = "Madam, I'm Madam"
+  48  
+  49  otomojidake :: String -> String
+  50  otomojidake str = filter isLetter
+  51  
+  52  komojinisuru :: String -> String
+  53  komojinisuru = map toLower 
+  54  
+  55  
+  56  {-
+  57  filter :: (a -> Bool) -> ([a] -> [a])
+  58  map :: (a -> b) -> ([a] -> [b])
+  59  -}
+  60  
+  61  {-
+  62  同値性の検査をする演算子　==
+  63  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:50:19: error:
+    • Couldn't match type ‘[Char] -> [Char]’ with ‘[Char]’
+      Expected type: String
+        Actual type: [Char] -> [Char]
+    • Probable cause: ‘filter’ is applied to too few arguments
+      In the expression: filter isLetter
+      In an equation for ‘otomojidake’: otomojidake str = filter isLetter
+   |
+50 | otomojidake str = filter isLetter
+   |                   ^^^^^^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-18T11:31:10</time>
+>>> :q
+<time>2021-11-18T11:34:09</time>
+Leaving GHCi.
+<time>2021-11-18T11:34:09</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+
+src/Ch01.hs:121:1: error:
+    The type signature for ‘gensokigouDict’
+      lacks an accompanying binding
+      Perhaps you meant ‘gensokioguDict’ (Defined at src/Ch01.hs:122:1)
+    |
+121 | gensokigouDict :: String -> Dict
+    | ^^^^^^^^^^^^^^
+
+src/Ch01.hs:124:1: error:
+    The type signature for ‘kiogu’ lacks an accompanying binding
+      Perhaps you meant ‘kigou’ (Defined at src/Ch01.hs:125:1)
+    |
+124 | kiogu :: String -> String
+    | ^^^^^
+Failed, modules loaded: none.
+<time>2021-11-18T11:58:35</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T10:55:56</time>
+>>> words text1
+<time>2021-11-25T10:56:23</time>
+
+<interactive>:1:7: error: Variable not in scope: text1 :: String
+<time>2021-11-25T10:56:23</time>
+>>> words text1
+<time>2021-11-25T10:57:39</time>
+
+<interactive>:2:7: error: Variable not in scope: text1 :: String
+<time>2021-11-25T10:57:39</time>
+>>> words text1
+<time>2021-11-25T10:58:06</time>
+
+<interactive>:3:7: error: Variable not in scope: text1 :: String
+<time>2021-11-25T10:58:06</time>
+>>> :e
+<time>2021-11-25T10:58:15</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = undefined
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou = undefined
+ 136  
+ 137  text1 :: String
+ 138  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T10:58:15</time>
+>>> :e
+<time>2021-11-25T10:58:18</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = undefined
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou = undefined
+ 136  
+ 137  text1 :: String
+ 138  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+Ok, modules loaded: Ch01.
+<time>2021-11-25T10:58:18</time>
+>>> words text1
+<time>2021-11-25T10:58:20</time>
+["Hi","He","Lied","Because","Boron","Could","Not","Oxidize","Fluorine.","New","Nations","Might","Also","Sign","Peace","Security","Clause.","Arthur","King","Can."]
+<time>2021-11-25T10:58:20</time>
+>>> :type zip
+<time>2021-11-25T10:58:30</time>
+zip :: [a] -> [b] -> [(a, b)]
+<time>2021-11-25T10:58:30</time>
+>>> [1 .. 10]
+<time>2021-11-25T11:00:15</time>
+[1,2,3,4,5,6,7,8,9,10]
+<time>2021-11-25T11:00:15</time>
+>>> length (words text1)
+<time>2021-11-25T11:01:02</time>
+20
+<time>2021-11-25T11:01:02</time>
+>>> zip [1 .. 20] (words text1)
+<time>2021-11-25T11:01:50</time>
+[(1,"Hi"),(2,"He"),(3,"Lied"),(4,"Because"),(5,"Boron"),(6,"Could"),(7,"Not"),(8,"Oxidize"),(9,"Fluorine."),(10,"New"),(11,"Nations"),(12,"Might"),(13,"Also"),(14,"Sign"),(15,"Peace"),(16,"Security"),(17,"Clause."),(18,"Arthur"),(19,"King"),(20,"Can.")]
+<time>2021-11-25T11:01:50</time>
+>>> take 100 [1 ..]
+<time>2021-11-25T11:06:46</time>
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]
+<time>2021-11-25T11:06:46</time>
+>>> zip [1 ..] (words text1)
+<time>2021-11-25T11:08:07</time>
+[(1,"Hi"),(2,"He"),(3,"Lied"),(4,"Because"),(5,"Boron"),(6,"Could"),(7,"Not"),(8,"Oxidize"),(9,"Fluorine."),(10,"New"),(11,"Nations"),(12,"Might"),(13,"Also"),(14,"Sign"),(15,"Peace"),(16,"Security"),(17,"Clause."),(18,"Arthur"),(19,"King"),(20,"Can.")]
+<time>2021-11-25T11:08:07</time>
+>>> ;r
+<time>2021-11-25T11:08:57</time>
+
+<interactive>:13:2: error:
+    Parse error: module header, import declaration
+    or top-level declaration expected.
+<time>2021-11-25T11:08:57</time>
+>>> :e
+<time>2021-11-25T11:08:59</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou = undefined
+ 136  text1 :: String
+ 137  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:08:59</time>
+>>> numbering (words text1)
+<time>2021-11-25T11:09:10</time>
+[(1,"Hi"),(2,"He"),(3,"Lied"),(4,"Because"),(5,"Boron"),(6,"Could"),(7,"Not"),(8,"Oxidize"),(9,"Fluorine."),(10,"New"),(11,"Nations"),(12,"Might"),(13,"Also"),(14,"Sign"),(15,"Peace"),(16,"Security"),(17,"Clause."),(18,"Arthur"),(19,"King"),(20,"Can.")]
+<time>2021-11-25T11:09:10</time>
+>>> :e
+<time>2021-11-25T11:17:13</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | elem i nums = (i, take 1 str)
+ 137      | otherwise   = (i, take 2 str)
+ 138  
+ 139  text1 :: String
+ 140  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 141  
+ 142  nums :: [Int]
+ 143  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:17:13</time>
+>>> gensokigouDict text1
+<time>2021-11-25T11:17:24</time>
+[(1,"H"),(2,"He"),(3,"Li"),(4,"Be"),(5,"B"),(6,"C"),(7,"N"),(8,"O"),(9,"F"),(10,"Ne"),(11,"Na"),(12,"Mi"),(13,"Al"),(14,"Si"),(15,"P"),(16,"S"),(17,"Cl"),(18,"Ar"),(19,"K"),(20,"Ca")]
+<time>2021-11-25T11:17:24</time>
+>>> :e
+<time>2021-11-25T11:20:18</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | i == 12     = (i, "Mg")
+ 137      | elem i nums = (i, take 1 str)
+ 138      | otherwise   = (i, take 2 str)
+ 139  
+ 140  text1 :: String
+ 141  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 142  
+ 143  nums :: [Int]
+ 144  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:20:18</time>
+>>> gensokigouDict text1
+<time>2021-11-25T11:20:24</time>
+[(1,"H"),(2,"He"),(3,"Li"),(4,"Be"),(5,"B"),(6,"C"),(7,"N"),(8,"O"),(9,"F"),(10,"Ne"),(11,"Na"),(12,"Mg"),(13,"Al"),(14,"Si"),(15,"P"),(16,"S"),(17,"Cl"),(18,"Ar"),(19,"K"),(20,"Ca")]
+<time>2021-11-25T11:20:24</time>
+>>> :e
+<time>2021-11-25T11:22:49</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | i == 12     = (i, "Mg")
+ 137      | i `elem` nums = (i, take 1 str)
+ 138      | otherwise   = (i, take 2 str)
+ 139  
+ 140  text1 :: String
+ 141  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 142  
+ 143  nums :: [Int]
+ 144  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:22:49</time>
+>>> :e
+<time>2021-11-25T11:39:12</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 04 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | i == 12     = (i, "Mg")
+ 137      | i `elem` nums = (i, take 1 str)
+ 138      | otherwise   = (i, take 2 str)
+ 139  
+ 140  text1 :: String
+ 141  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 142  
+ 143  nums :: [Int]
+ 144  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 145  
+ 146  -- 05 N-gram
+ 147  
+ 148  bigram :: [a] -> [(a,a)]
+ 149  bigram xs = zip xs (tail xs)
+ 150  
+ 151  text2 :: String
+ 152  text2 = "I am an NLPer"
+ 153  
+ 154  tangoBigram :: [(String, String)]
+ 155  tangoBigram = bigram (words text2)
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:39:12</time>
+>>> tangoBigram
+<time>2021-11-25T11:39:25</time>
+[("I","am"),("am","an"),("an","NLPer")]
+<time>2021-11-25T11:39:25</time>
+>>> :
+<time>2021-11-25T11:42:28</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 04 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | i == 12     = (i, "Mg")
+ 137      | i `elem` nums = (i, take 1 str)
+ 138      | otherwise   = (i, take 2 str)
+ 139  
+ 140  text1 :: String
+ 141  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 142  
+ 143  nums :: [Int]
+ 144  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 145  
+ 146  -- 05 N-gram
+ 147  
+ 148  bigram :: [a] -> [(a,a)]
+ 149  bigram xs = zip xs (tail xs)
+ 150  
+ 151  text2 :: String
+ 152  text2 = "I am an NLPer"
+ 153  
+ 154  tangoBigram :: [(String, String)]
+ 155  tangoBigram = bigram (words text2)
+ 156  
+ 157  mojiBigram :: [(Char, Char)]
+ 158  mojiBigram = bigram text2
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:42:28</time>
+>>> :e
+<time>2021-11-25T11:42:40</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module Ch01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  12  {- |
+  13  >>> putStrLn omake00
+  14  ぞたけやぶやけた
+  15  -}
+  16  omake00 :: String
+  17  omake00 = reverse "たけやぶやけたぞ"
+  18  
+  19  -- 01. パタトクカシーー
+  20  ans01 :: String
+  21  ans01 =  takeOdds "パタトクカシーー"
+  22  
+  23  {- | 文字列から奇数番目の文字だけとりだす
+  24  >>> putStrLn (takeOdds "パタトクカシーー")
+  25  パトカー
+  26  >>> putStrLn (takeOdds "hogehoge")
+  27  hghg
+  28  -}
+  29  takeOdds :: [a] -> [a]
+  30  takeOdds []     = []
+  31  takeOdds (c:cs) = c : takeEvens cs
+  32  
+  33  {- | リストから偶数番目の要素だけとりだす
+  34  >>> putStrLn (takeEvens "パタトクカシーー")
+  35  タクシー
+  36  -}
+  37  takeEvens :: [a] -> [a]
+  38  takeEvens []     = []
+  39  takeEvens (c:cs) = takeOdds cs
+  40  -- takeEvens (c:[])     = []
+  41  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  42  
+  43  sample :: String
+  44  sample = "パタトクカシーー"
+  45  
+  46  -- 02
+  47  {- |
+  48  >>> putStr $ interleave "パトカー" "タクシー"
+  49  パタトクカシーー
+  50  -}
+  51  interleave :: [a] -> [a] -> [a]
+  52  interleave []     ys = []                   -- (1)
+  53  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  54  {- 
+  55  interleave "はれ" "あめ"
+  56  = {"はれ" = 'は':"れ"}
+  57  interleave ('は' :"れ") "あめ"
+  58  = {(2)}
+  59  'は' : interleave "あめ" "れ"
+  60  = {"あめ" = 'あ':"め"}
+  61  'は' : interleave ('あ':"め") "れ"
+  62  = {(2)}
+  63  'は' : ('あ' =interleave "れ"　"め")
+  64  = {"れ" = 'れ': []}
+  65  'は' : ('あ' : interleave ('れ':[]) "め")
+  66  ={(2)}
+  67  'は' : ('あ' : ('れ' : interleave "め"[])
+  68  =
+  69  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  70  =
+  71  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  72  ={(1)}
+  73  'は' : ('あ' : ('れ' : ('め' : [])))
+  74  =
+  75  'は' ; ('あ' ; ('れ' : "め"))
+  76  =
+  77  'は' : ('あ' : "れめ")
+  78  =
+  79  'は' : "あれめ"
+  80  =
+  81  "はあれめ"
+  82  -}
+  83  
+  84  -- 03 円周率
+  85  {-
+  86  1. '.'と'.'を除く removeCommaAndPerild
+  87  2. 単語に分ける words
+  88  3. 各単語の長さを求める関数lengthを適用
+  89  -}
+  90  samplePi :: String
+  91  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  92  
+  93  wordLengths :: String -> [Int]
+  94  wordLengths = map length . words . removeCommaAndPeriod
+  95  
+  96  --gonyo :: String -> [Int]
+  97  --gonyo = monyo . words
+  98  
+  99  --monyo :: [String] -> [Int]
+ 100  --monyo = map length
+ 101  
+ 102  {-
+ 103  map f リスト
+ 104  
+ 105  hoge = map toUpper 
+ 106  
+ 107  -}
+ 108  
+ 109  removeCommaAndPeriod :: String -> String
+ 110  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 111  
+ 112  isNotCommaAndNotPeriod :: Char -> Bool
+ 113  isNotCommaAndNotPeriod ',' = False
+ 114  isNotCommaAndNotPeriod '.' = False
+ 115  isNotCommaAndNotPeriod _   = True
+ 116  
+ 117  -- 04 元素記号
+ 118  
+ 119  type Dict = [(Int, String)]
+ 120  
+ 121  gensokigouDict :: String -> Dict
+ 122  gensokioguDict = map kigou . numbering . words
+ 123  {-
+ 124  gensokioguDict = numbering . map kigou . words
+ 125  
+ 126  kiogu :: String -> String
+ 127  kigou = undefined
+ 128  -}
+ 129  numbering :: [String] -> [(Int, String)]
+ 130  numbering = zip [1 ..]
+ 131  
+ 132  gensokigouDict = map kigou . numbering . words
+ 133  
+ 134  kigou :: (Int, String) -> (Int, String)
+ 135  kigou (i, str)
+ 136      | i == 12     = (i, "Mg")
+ 137      | i `elem` nums = (i, take 1 str)
+ 138      | otherwise   = (i, take 2 str)
+ 139  
+ 140  text1 :: String
+ 141  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 142  
+ 143  nums :: [Int]
+ 144  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 145  
+ 146  -- 05 N-gram
+ 147  
+ 148  bigram :: [a] -> [(a,a)]
+ 149  bigram xs = zip xs (tail xs)
+ 150  
+ 151  text2 :: String
+ 152  text2 = "I am an NLPer"
+ 153  
+ 154  tangoBigram :: [(String, String)]
+ 155  tangoBigram = bigram (words text2)
+ 156  
+ 157  mojiBigram :: [(Char, Char)]
+ 158  mojiBigram = bigram text2
+Ok, modules loaded: Ch01.
+<time>2021-11-25T11:42:40</time>
+>>> mojiBigram
+<time>2021-11-25T11:42:47</time>
+[('I',' '),(' ','a'),('a','m'),('m',' '),(' ','a'),('a','n'),('n',' '),(' ','N'),('N','L'),('L','P'),('P','e'),('e','r')]
+<time>2021-11-25T11:42:47</time>
+>>> ngram 2 (words text2)
+<time>2021-11-25T11:54:13</time>
+
+<interactive>:26:1: error:
+    Variable not in scope: ngram :: t0 -> [String] -> t
+<time>2021-11-25T11:54:13</time>
+>>> tail text2
+<time>2021-11-25T11:54:23</time>
+" am an NLPer"
+<time>2021-11-25T11:54:23</time>
+>>> tails text2
+<time>2021-11-25T11:54:37</time>
+
+<interactive>:28:1: error:
+    • Variable not in scope: tails :: String -> t
+    • Perhaps you meant ‘tail’ (imported from Prelude)
+<time>2021-11-25T11:54:37</time>
+>>> tail (words text2)
+<time>2021-11-25T11:54:50</time>
+["am","an","NLPer"]
+<time>2021-11-25T11:54:50</time>
+>>> tails (words text2)
+<time>2021-11-25T11:55:16</time>
+
+<interactive>:30:1: error:
+    • Variable not in scope: tails :: [String] -> t
+    • Perhaps you meant ‘tail’ (imported from Prelude)
+<time>2021-11-25T11:55:16</time>
+>>> words "abc def ghi"
+<time>2021-11-25T11:58:23</time>
+["abc","def","ghi"]
+<time>2021-11-25T11:58:23</time>
+>>> transpose it
+<time>2021-11-25T11:59:26</time>
+
+<interactive>:32:1: error:
+    Variable not in scope: transpose :: [String] -> t
+<time>2021-11-25T11:59:26</time>
+>>> :q
+<time>2021-11-25T12:12:49</time>
+Leaving GHCi.
+<time>2021-11-25T12:12:49</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+
+src/Ex01.hs:51:19: error:
+    • Couldn't match type ‘[Char] -> [Char]’ with ‘[Char]’
+      Expected type: String
+        Actual type: [Char] -> [Char]
+    • Probable cause: ‘filter’ is applied to too few arguments
+      In the expression: filter isLetter
+      In an equation for ‘otomojidake’: otomojidake str = filter isLetter
+   |
+51 | otomojidake str = filter isLetter
+   |                   ^^^^^^^^^^^^^^^
+Failed, modules loaded: none.
+<time>2021-11-28T18:47:50</time>
+>>> :e
+<time>2021-11-28T19:06:30</time>
+   1  module Ex01 where
+   2  
+   3  import Data.Char
+   4  import Data.STRef.Strict (STRef)
+   5  
+   6  -- 文字型 Char
+   7  -- 文字列型　String = [Char]
+   8  
+   9  -- 文字には文字番号が対応している
+  10  -- いわゆる半角英数はASCII
+  11  
+  12  {- |
+  13  回文判定
+  14  >>> palindrome "たけやぶやけた"
+  15  True
+  16  >>> palindrome "abracatabra"
+  17  False
+  18  -}
+  19  
+  20  palindrome :: String -> Bool --型シグネチャ
+  21  palindrome str = str == reverse str
+  22  
+  23  {- |
+  24  >>> palindromeKai "Madam, I'm Adam."
+  25  True
+  26  >>> palindromeKai "たけやぶ やけた?"
+  27  True
+  28  -}
+  29  palindromeKai :: String -> Bool
+  30  -- palindromeKai str = palindrome (komojinisuru (otomojidake str))
+  31  palindromeKai = palindrome . komojinisuru . filter isLetter
+  32  
+  33  {-
+  34  h x = g (f x)
+  35  
+  36          f      g
+  37      (X) -> (Y) -> (Z)
+  38          -------->
+  39              h
+  40  h は f と g を合成したもの
+  41  h :: X -> Z
+  42  f :: X -> Y
+  43  g :: Y -> Z
+  44  
+  45  h = g . f
+  46  -}
+  47  sample1 :: String
+  48  sample1 = "Madam, I'm Madam"
+  49  
+  50  otomojidake :: String -> String
+  51  otomojidake = filter isLetter
+  52  
+  53  komojinisuru :: String -> String
+  54  komojinisuru = map toLower 
+  55  
+  56  
+  57  {-
+  58  filter :: (a -> Bool) -> ([a] -> [a])
+  59  map :: (a -> b) -> ([a] -> [b])
+  60  -}
+  61  
+  62  {-
+  63  同値性の検査をする演算子　==
+  64  -}
+[1 of 1] Compiling Ex01             ( src/Ex01.hs, interpreted )
+Ok, modules loaded: Ex01.
+<time>2021-11-28T19:06:30</time>
+>>> :q
+<time>2021-11-28T19:06:40</time>
+Leaving GHCi.
+<time>2021-11-28T19:06:40</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+target ‘src/Ch01/hs’ is not a module name or a source file
+<time>2021-11-28T19:06:51</time>
+>>> :q
+<time>2021-11-28T19:06:58</time>
+Leaving GHCi.
+<time>2021-11-28T19:06:58</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-11-28T19:07:08</time>
+>>> tangoBigram
+<time>2021-11-28T19:07:23</time>
+[("I","am"),("am","an"),("an","NLPer")]
+<time>2021-11-28T19:07:23</time>
+>>> ngram 2 (words text2)
+<time>2021-11-28T19:07:41</time>
+[["I","am"],["am","an"],["an","NLPer"]]
+<time>2021-11-28T19:07:41</time>
+>>> ngram 3 (words text2)
+<time>2021-11-28T19:07:52</time>
+[["I","am","an"],["am","an","NLPer"]]
+<time>2021-11-28T19:07:52</time>
+>>> :q
+<time>2021-11-28T19:14:14</time>
+Leaving GHCi.
+<time>2021-11-28T19:14:14</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-28T19:14:26</time>
+>>> ans00
+<time>2021-11-28T19:14:29</time>
+"desserts"
+<time>2021-11-28T19:14:29</time>
+>>> :e
+<time>2021-11-28T19:44:05</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- 
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  ans01 :: String
+  14  ans01 = takeOdds "パタトクカシーー"
+  15  
+  16  takeOdds :: String -> String
+  17  takeOdds [] = []
+  18  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-28T19:44:05</time>
+>>> ans01
+<time>2021-11-28T19:45:07</time>
+"パトカー"
+<time>2021-11-28T19:45:07</time>
+>>> :q
+<time>2021-11-28T20:01:43</time>
+Leaving GHCi.
+<time>2021-11-28T20:01:43</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-29T19:47:29</time>
+>>> ans02
+<time>2021-11-29T19:47:33</time>
+"パクー"
+<time>2021-11-29T19:47:33</time>
+>>> ans01
+<time>2021-11-29T19:49:04</time>
+"パトカー"
+<time>2021-11-29T19:49:04</time>
+>>> :e
+<time>2021-11-29T19:49:06</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  {- | 文字列から奇数番目の文字だけ取りだす
+  14  >>> putStrLn (takeOdds "パタトクカシーー")
+  15  パトカー
+  16  -}
+  17  ans01 :: String
+  18  ans01 = takeOdds "ジョテンヒョグンク"
+  19  
+  20  takeOdds :: [a] -> [a]
+  21  takeOdds []     = []
+  22  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  23  
+  24  ans02 :: String
+  25  ans02 = takeEvens ""
+  26  
+  27  takeEvens :: [a] -> [a]
+  28  takeEvens []     = []
+  29  takeEvens (c:cs) = c : takeEvens (drop 2 cs)
+  30  
+  31  -- 02 パトカー + タクシー
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-29T19:49:06</time>
+>>> ans01
+<time>2021-11-29T19:49:09</time>
+"ジテヒグク"
+<time>2021-11-29T19:49:09</time>
+>>> :e
+<time>2021-11-29T19:49:39</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  {- | 文字列から奇数番目の文字だけ取りだす
+  14  >>> putStrLn (takeOdds "パタトクカシーー")
+  15  パトカー
+  16  -}
+  17  ans01 :: String
+  18  ans01 = takeOdds "グテクテ"
+  19  
+  20  takeOdds :: [a] -> [a]
+  21  takeOdds []     = []
+  22  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  23  
+  24  ans02 :: String
+  25  ans02 = takeEvens ""
+  26  
+  27  takeEvens :: [a] -> [a]
+  28  takeEvens []     = []
+  29  takeEvens (c:cs) = c : takeEvens (drop 2 cs)
+  30  
+  31  -- 02 パトカー + タクシー
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-29T19:49:39</time>
+>>> ans01
+<time>2021-11-29T19:49:43</time>
+"グク"
+<time>2021-11-29T19:49:43</time>
+>>> ans02
+<time>2021-11-29T19:50:01</time>
+""
+<time>2021-11-29T19:50:01</time>
+>>> ans02
+<time>2021-11-29T19:50:42</time>
+""
+<time>2021-11-29T19:50:42</time>
+>>> :e
+<time>2021-11-29T19:50:44</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  {- | 文字列から奇数番目の文字だけ取りだす
+  14  >>> putStrLn (takeOdds "パタトクカシーー")
+  15  パトカー
+  16  -}
+  17  ans01 :: String
+  18  ans01 = takeOdds "グテクテ"
+  19  
+  20  takeOdds :: [a] -> [a]
+  21  takeOdds []     = []
+  22  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  23  
+  24  ans02 :: String
+  25  ans02 = takeEvens "グテクテ"
+  26  
+  27  takeEvens :: [a] -> [a]
+  28  takeEvens []     = []
+  29  takeEvens (c:cs) = takeOdds cs
+  30  -- 02 パトカー + タクシー
+[1 of 1] Compiling My01             ( src/My01.hs, interpreted )
+Ok, modules loaded: My01.
+<time>2021-11-29T19:50:44</time>
+>>> :e
+<time>2021-11-29T19:50:45</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  {- | 文字列から奇数番目の文字だけ取りだす
+  14  >>> putStrLn (takeOdds "パタトクカシーー")
+  15  パトカー
+  16  -}
+  17  ans01 :: String
+  18  ans01 = takeOdds "グテクテ"
+  19  
+  20  takeOdds :: [a] -> [a]
+  21  takeOdds []     = []
+  22  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  23  
+  24  ans02 :: String
+  25  ans02 = takeEvens "グテクテ"
+  26  
+  27  takeEvens :: [a] -> [a]
+  28  takeEvens []     = []
+  29  takeEvens (c:cs) = takeOdds cs
+  30  -- 02 パトカー + タクシー
+Ok, modules loaded: My01.
+<time>2021-11-29T19:50:45</time>
+>>> ans02
+<time>2021-11-29T19:50:48</time>
+"テテ"
+<time>2021-11-29T19:50:48</time>
+>>> :e
+<time>2021-11-29T19:50:55</time>
+   1  {-# LANGUAGE TypeApplications #-}
+   2  module My01 where
+   3  
+   4  -- 00 "stressed" の逆順
+   5  {- |
+   6  >>> ans00
+   7  "desserts"
+   8  -}
+   9  ans00 :: String
+  10  ans00 = reverse "stressed"
+  11  
+  12  -- 01 パタトクカシーー
+  13  {- | 文字列から奇数番目の文字だけ取りだす
+  14  >>> putStrLn (takeOdds "パタトクカシーー")
+  15  パトカー
+  16  -}
+  17  ans01 :: String
+  18  ans01 = takeOdds "グテクテ"
+  19  
+  20  takeOdds :: [a] -> [a]
+  21  takeOdds []     = []
+  22  takeOdds (c:cs) = c : takeOdds (drop 1 cs)
+  23  
+  24  ans02 :: String
+  25  ans02 = takeEvens "グテクテ"
+  26  
+  27  takeEvens :: [a] -> [a]
+  28  takeEvens []     = []
+  29  takeEvens (c:cs) = takeOdds cs
+  30  -- 02 パトカー + タクシー
+Ok, modules loaded: My01.
+<time>2021-11-29T19:50:55</time>
+>>> ans01
+<time>2021-11-29T19:54:11</time>
+"グク"
+<time>2021-11-29T19:54:11</time>
+>>> ans02
+<time>2021-11-29T19:54:14</time>
+"テテ"
+<time>2021-11-29T19:54:14</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-02T11:49:35</time>
+>>> xs
+<time>2021-12-02T11:49:38</time>
+[('p','a'),('a','r'),('r','a'),('a','p'),('p','a'),('a','r'),('r','a'),('a','p'),('p','a'),('a','r'),('r','a'),('a','d'),('d','i'),('i','s'),('s','e')]
+<time>2021-12-02T11:49:38</time>
+>>> length xs
+<time>2021-12-02T11:49:45</time>
+15
+<time>2021-12-02T11:49:45</time>
+>>> _X
+<time>2021-12-02T11:49:52</time>
+fromList [('a','d'),('a','p'),('a','r'),('d','i'),('i','s'),('p','a'),('r','a'),('s','e')]
+<time>2021-12-02T11:49:52</time>
+>>> Set.size _X
+<time>2021-12-02T11:53:12</time>
+8
+<time>2021-12-02T11:53:12</time>
+>>> :e
+<time>2021-12-02T11:54:21</time>
+   1  module Ch01 where
+   2  
+   3  import Data.List ( inits, tails, transpose )
+   4  import Data.Set (Set)
+   5  import qualified Data.Set as Set
+   6  
+   7  -- 00 "stressed" の逆順
+   8  {- |
+   9  >>> ans00
+  10  "desserts"
+  11  -}
+  12  ans00 :: String
+  13  ans00 = reverse "stressed"
+  14  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  15  {- |
+  16  >>> putStrLn omake00
+  17  ぞたけやぶやけた
+  18  -}
+  19  omake00 :: String
+  20  omake00 = reverse "たけやぶやけたぞ"
+  21  
+  22  -- 01. パタトクカシーー
+  23  ans01 :: String
+  24  ans01 =  takeOdds "パタトクカシーー"
+  25  
+  26  {- | 文字列から奇数番目の文字だけとりだす
+  27  >>> putStrLn (takeOdds "パタトクカシーー")
+  28  パトカー
+  29  >>> putStrLn (takeOdds "hogehoge")
+  30  hghg
+  31  -}
+  32  takeOdds :: [a] -> [a]
+  33  takeOdds []     = []
+  34  takeOdds (c:cs) = c : takeEvens cs
+  35  
+  36  {- | リストから偶数番目の要素だけとりだす
+  37  >>> putStrLn (takeEvens "パタトクカシーー")
+  38  タクシー
+  39  -}
+  40  takeEvens :: [a] -> [a]
+  41  takeEvens []     = []
+  42  takeEvens (c:cs) = takeOdds cs
+  43  -- takeEvens (c:[])     = []
+  44  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  45  
+  46  sample :: String
+  47  sample = "パタトクカシーー"
+  48  
+  49  -- 02
+  50  {- |
+  51  >>> putStr $ interleave "パトカー" "タクシー"
+  52  パタトクカシーー
+  53  -}
+  54  interleave :: [a] -> [a] -> [a]
+  55  interleave []     ys = []                   -- (1)
+  56  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  57  {- 
+  58  interleave "はれ" "あめ"
+  59  = {"はれ" = 'は':"れ"}
+  60  interleave ('は' :"れ") "あめ"
+  61  = {(2)}
+  62  'は' : interleave "あめ" "れ"
+  63  = {"あめ" = 'あ':"め"}
+  64  'は' : interleave ('あ':"め") "れ"
+  65  = {(2)}
+  66  'は' : ('あ' =interleave "れ"　"め")
+  67  = {"れ" = 'れ': []}
+  68  'は' : ('あ' : interleave ('れ':[]) "め")
+  69  ={(2)}
+  70  'は' : ('あ' : ('れ' : interleave "め"[])
+  71  =
+  72  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  73  =
+  74  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  75  ={(1)}
+  76  'は' : ('あ' : ('れ' : ('め' : [])))
+  77  =
+  78  'は' ; ('あ' ; ('れ' : "め"))
+  79  =
+  80  'は' : ('あ' : "れめ")
+  81  =
+  82  'は' : "あれめ"
+  83  =
+  84  "はあれめ"
+  85  -}
+  86  
+  87  -- 03 円周率
+  88  {-
+  89  1. '.'と'.'を除く removeCommaAndPerild
+  90  2. 単語に分ける words
+  91  3. 各単語の長さを求める関数lengthを適用
+  92  -}
+  93  samplePi :: String
+  94  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  95  
+  96  wordLengths :: String -> [Int]
+  97  wordLengths = map length . words . removeCommaAndPeriod
+  98  
+  99  --gonyo :: String -> [Int]
+ 100  --gonyo = monyo . words
+ 101  
+ 102  --monyo :: [String] -> [Int]
+ 103  --monyo = map length
+ 104  
+ 105  {-
+ 106  map f リスト
+ 107  
+ 108  hoge = map toUpper 
+ 109  
+ 110  -}
+ 111  
+ 112  removeCommaAndPeriod :: String -> String
+ 113  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 114  
+ 115  isNotCommaAndNotPeriod :: Char -> Bool
+ 116  isNotCommaAndNotPeriod ',' = False
+ 117  isNotCommaAndNotPeriod '.' = False
+ 118  isNotCommaAndNotPeriod _   = True
+ 119  
+ 120  -- 04 元素記号
+ 121  
+ 122  type Dict = [(Int, String)]
+ 123  
+ 124  gensokigouDict :: String -> Dict
+ 125  gensokioguDict = map kigou . numbering . words
+ 126  {-
+ 127  gensokioguDict = numbering . map kigou . words
+ 128  
+ 129  kiogu :: String -> String
+ 130  kigou = undefined
+ 131  -}
+ 132  numbering :: [String] -> [(Int, String)]
+ 133  numbering = zip [1 ..]
+ 134  
+ 135  gensokigouDict = map kigou . numbering . words
+ 136  
+ 137  kigou :: (Int, String) -> (Int, String)
+ 138  kigou (i, str)
+ 139      | i == 12     = (i, "Mg")
+ 140      | i `elem` nums = (i, take 1 str)
+ 141      | otherwise   = (i, take 2 str)
+ 142  
+ 143  text1 :: String
+ 144  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 145  
+ 146  nums :: [Int]
+ 147  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 148  
+ 149  -- 05 N-gram
+ 150  bigram :: [a] -> [(a,a)]
+ 151  bigram xs = zip xs (tail xs)
+ 152  
+ 153  text2 :: String
+ 154  text2 = "I am an NLPer"
+ 155  
+ 156  tangoBigram :: [(String, String)]
+ 157  tangoBigram = bigram (words text2)
+ 158  
+ 159  mojiBigram :: [(Char, Char)]
+ 160  mojiBigram = bigram text2
+ 161  
+ 162  -- (a, a) と (a, a, a) は別の型
+ 163  
+ 164  ngram :: Int -> [a] -> [[a]]
+ 165  ngram n xs = transpose (map inits (tails xs)) !! n
+ 166  
+ 167  -- 06 集合
+ 168  
+ 169  str1 :: String
+ 170  str1 = "paraparaparadise"
+ 171  str2 :: String
+ 172  str2 = "paragraph"
+ 173  
+ 174  xs :: [(Char, Char)]
+ 175  xs = bigram str1
+ 176  
+ 177  ys :: [(Char, Char)]
+ 178  ys = bigram str2
+ 179  
+ 180  _X :: Set (Char, Char)
+ 181  _X = Set.fromList xs
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-02T11:54:21</time>
+>>> ys
+<time>2021-12-02T11:54:24</time>
+[('p','a'),('a','r'),('r','a'),('a','g'),('g','r'),('r','a'),('a','p'),('p','h')]
+<time>2021-12-02T11:54:24</time>
+>>> length it
+<time>2021-12-02T11:54:31</time>
+8
+<time>2021-12-02T11:54:31</time>
+>>> :e
+<time>2021-12-02T11:55:34</time>
+   1  module Ch01 where
+   2  
+   3  import Data.List ( inits, tails, transpose )
+   4  import Data.Set (Set)
+   5  import qualified Data.Set as Set
+   6  
+   7  -- 00 "stressed" の逆順
+   8  {- |
+   9  >>> ans00
+  10  "desserts"
+  11  -}
+  12  ans00 :: String
+  13  ans00 = reverse "stressed"
+  14  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  15  {- |
+  16  >>> putStrLn omake00
+  17  ぞたけやぶやけた
+  18  -}
+  19  omake00 :: String
+  20  omake00 = reverse "たけやぶやけたぞ"
+  21  
+  22  -- 01. パタトクカシーー
+  23  ans01 :: String
+  24  ans01 =  takeOdds "パタトクカシーー"
+  25  
+  26  {- | 文字列から奇数番目の文字だけとりだす
+  27  >>> putStrLn (takeOdds "パタトクカシーー")
+  28  パトカー
+  29  >>> putStrLn (takeOdds "hogehoge")
+  30  hghg
+  31  -}
+  32  takeOdds :: [a] -> [a]
+  33  takeOdds []     = []
+  34  takeOdds (c:cs) = c : takeEvens cs
+  35  
+  36  {- | リストから偶数番目の要素だけとりだす
+  37  >>> putStrLn (takeEvens "パタトクカシーー")
+  38  タクシー
+  39  -}
+  40  takeEvens :: [a] -> [a]
+  41  takeEvens []     = []
+  42  takeEvens (c:cs) = takeOdds cs
+  43  -- takeEvens (c:[])     = []
+  44  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  45  
+  46  sample :: String
+  47  sample = "パタトクカシーー"
+  48  
+  49  -- 02
+  50  {- |
+  51  >>> putStr $ interleave "パトカー" "タクシー"
+  52  パタトクカシーー
+  53  -}
+  54  interleave :: [a] -> [a] -> [a]
+  55  interleave []     ys = []                   -- (1)
+  56  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  57  {- 
+  58  interleave "はれ" "あめ"
+  59  = {"はれ" = 'は':"れ"}
+  60  interleave ('は' :"れ") "あめ"
+  61  = {(2)}
+  62  'は' : interleave "あめ" "れ"
+  63  = {"あめ" = 'あ':"め"}
+  64  'は' : interleave ('あ':"め") "れ"
+  65  = {(2)}
+  66  'は' : ('あ' =interleave "れ"　"め")
+  67  = {"れ" = 'れ': []}
+  68  'は' : ('あ' : interleave ('れ':[]) "め")
+  69  ={(2)}
+  70  'は' : ('あ' : ('れ' : interleave "め"[])
+  71  =
+  72  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  73  =
+  74  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  75  ={(1)}
+  76  'は' : ('あ' : ('れ' : ('め' : [])))
+  77  =
+  78  'は' ; ('あ' ; ('れ' : "め"))
+  79  =
+  80  'は' : ('あ' : "れめ")
+  81  =
+  82  'は' : "あれめ"
+  83  =
+  84  "はあれめ"
+  85  -}
+  86  
+  87  -- 03 円周率
+  88  {-
+  89  1. '.'と'.'を除く removeCommaAndPerild
+  90  2. 単語に分ける words
+  91  3. 各単語の長さを求める関数lengthを適用
+  92  -}
+  93  samplePi :: String
+  94  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  95  
+  96  wordLengths :: String -> [Int]
+  97  wordLengths = map length . words . removeCommaAndPeriod
+  98  
+  99  --gonyo :: String -> [Int]
+ 100  --gonyo = monyo . words
+ 101  
+ 102  --monyo :: [String] -> [Int]
+ 103  --monyo = map length
+ 104  
+ 105  {-
+ 106  map f リスト
+ 107  
+ 108  hoge = map toUpper 
+ 109  
+ 110  -}
+ 111  
+ 112  removeCommaAndPeriod :: String -> String
+ 113  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 114  
+ 115  isNotCommaAndNotPeriod :: Char -> Bool
+ 116  isNotCommaAndNotPeriod ',' = False
+ 117  isNotCommaAndNotPeriod '.' = False
+ 118  isNotCommaAndNotPeriod _   = True
+ 119  
+ 120  -- 04 元素記号
+ 121  
+ 122  type Dict = [(Int, String)]
+ 123  
+ 124  gensokigouDict :: String -> Dict
+ 125  gensokioguDict = map kigou . numbering . words
+ 126  {-
+ 127  gensokioguDict = numbering . map kigou . words
+ 128  
+ 129  kiogu :: String -> String
+ 130  kigou = undefined
+ 131  -}
+ 132  numbering :: [String] -> [(Int, String)]
+ 133  numbering = zip [1 ..]
+ 134  
+ 135  gensokigouDict = map kigou . numbering . words
+ 136  
+ 137  kigou :: (Int, String) -> (Int, String)
+ 138  kigou (i, str)
+ 139      | i == 12     = (i, "Mg")
+ 140      | i `elem` nums = (i, take 1 str)
+ 141      | otherwise   = (i, take 2 str)
+ 142  
+ 143  text1 :: String
+ 144  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 145  
+ 146  nums :: [Int]
+ 147  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 148  
+ 149  -- 05 N-gram
+ 150  bigram :: [a] -> [(a,a)]
+ 151  bigram xs = zip xs (tail xs)
+ 152  
+ 153  text2 :: String
+ 154  text2 = "I am an NLPer"
+ 155  
+ 156  tangoBigram :: [(String, String)]
+ 157  tangoBigram = bigram (words text2)
+ 158  
+ 159  mojiBigram :: [(Char, Char)]
+ 160  mojiBigram = bigram text2
+ 161  
+ 162  -- (a, a) と (a, a, a) は別の型
+ 163  
+ 164  ngram :: Int -> [a] -> [[a]]
+ 165  ngram n xs = transpose (map inits (tails xs)) !! n
+ 166  
+ 167  -- 06 集合
+ 168  
+ 169  str1 :: String
+ 170  str1 = "paraparaparadise"
+ 171  str2 :: String
+ 172  str2 = "paragraph"
+ 173  
+ 174  xs :: [(Char, Char)]
+ 175  xs = bigram str1
+ 176  
+ 177  ys :: [(Char, Char)]
+ 178  ys = bigram str2
+ 179  
+ 180  _X :: Set (Char, Char)
+ 181  _X = Set.fromList xs
+ 182  
+ 183  _Y :: Set (Char, Char)
+ 184  _Y = Set.fromList ys
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-02T11:55:34</time>
+>>> _Y
+<time>2021-12-02T11:55:46</time>
+fromList [('a','g'),('a','p'),('a','r'),('g','r'),('p','a'),('p','h'),('r','a')]
+<time>2021-12-02T11:55:46</time>
+>>> Set.size _Y
+<time>2021-12-02T11:55:59</time>
+7
+<time>2021-12-02T11:55:59</time>
+>>> :e
+<time>2021-12-02T12:09:30</time>
+   1  module Ch01 where
+   2  
+   3  import Data.List ( inits, tails, transpose )
+   4  import Data.Set (Set)
+   5  import qualified Data.Set as Set
+   6  
+   7  -- 00 "stressed" の逆順
+   8  {- |
+   9  >>> ans00
+  10  "desserts"
+  11  -}
+  12  ans00 :: String
+  13  ans00 = reverse "stressed"
+  14  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  15  {- |
+  16  >>> putStrLn omake00
+  17  ぞたけやぶやけた
+  18  -}
+  19  omake00 :: String
+  20  omake00 = reverse "たけやぶやけたぞ"
+  21  
+  22  -- 01. パタトクカシーー
+  23  ans01 :: String
+  24  ans01 =  takeOdds "パタトクカシーー"
+  25  
+  26  {- | 文字列から奇数番目の文字だけとりだす
+  27  >>> putStrLn (takeOdds "パタトクカシーー")
+  28  パトカー
+  29  >>> putStrLn (takeOdds "hogehoge")
+  30  hghg
+  31  -}
+  32  takeOdds :: [a] -> [a]
+  33  takeOdds []     = []
+  34  takeOdds (c:cs) = c : takeEvens cs
+  35  
+  36  {- | リストから偶数番目の要素だけとりだす
+  37  >>> putStrLn (takeEvens "パタトクカシーー")
+  38  タクシー
+  39  -}
+  40  takeEvens :: [a] -> [a]
+  41  takeEvens []     = []
+  42  takeEvens (c:cs) = takeOdds cs
+  43  -- takeEvens (c:[])     = []
+  44  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  45  
+  46  sample :: String
+  47  sample = "パタトクカシーー"
+  48  
+  49  -- 02
+  50  {- |
+  51  >>> putStr $ interleave "パトカー" "タクシー"
+  52  パタトクカシーー
+  53  -}
+  54  interleave :: [a] -> [a] -> [a]
+  55  interleave []     ys = []                   -- (1)
+  56  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  57  {- 
+  58  interleave "はれ" "あめ"
+  59  = {"はれ" = 'は':"れ"}
+  60  interleave ('は' :"れ") "あめ"
+  61  = {(2)}
+  62  'は' : interleave "あめ" "れ"
+  63  = {"あめ" = 'あ':"め"}
+  64  'は' : interleave ('あ':"め") "れ"
+  65  = {(2)}
+  66  'は' : ('あ' =interleave "れ"　"め")
+  67  = {"れ" = 'れ': []}
+  68  'は' : ('あ' : interleave ('れ':[]) "め")
+  69  ={(2)}
+  70  'は' : ('あ' : ('れ' : interleave "め"[])
+  71  =
+  72  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  73  =
+  74  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  75  ={(1)}
+  76  'は' : ('あ' : ('れ' : ('め' : [])))
+  77  =
+  78  'は' ; ('あ' ; ('れ' : "め"))
+  79  =
+  80  'は' : ('あ' : "れめ")
+  81  =
+  82  'は' : "あれめ"
+  83  =
+  84  "はあれめ"
+  85  -}
+  86  
+  87  -- 03 円周率
+  88  {-
+  89  1. '.'と'.'を除く removeCommaAndPerild
+  90  2. 単語に分ける words
+  91  3. 各単語の長さを求める関数lengthを適用
+  92  -}
+  93  samplePi :: String
+  94  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  95  
+  96  wordLengths :: String -> [Int]
+  97  wordLengths = map length . words . removeCommaAndPeriod
+  98  
+  99  --gonyo :: String -> [Int]
+ 100  --gonyo = monyo . words
+ 101  
+ 102  --monyo :: [String] -> [Int]
+ 103  --monyo = map length
+ 104  
+ 105  {-
+ 106  map f リスト
+ 107  
+ 108  hoge = map toUpper 
+ 109  
+ 110  -}
+ 111  
+ 112  removeCommaAndPeriod :: String -> String
+ 113  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 114  
+ 115  isNotCommaAndNotPeriod :: Char -> Bool
+ 116  isNotCommaAndNotPeriod ',' = False
+ 117  isNotCommaAndNotPeriod '.' = False
+ 118  isNotCommaAndNotPeriod _   = True
+ 119  
+ 120  -- 04 元素記号
+ 121  
+ 122  type Dict = [(Int, String)]
+ 123  
+ 124  gensokigouDict :: String -> Dict
+ 125  gensokioguDict = map kigou . numbering . words
+ 126  {-
+ 127  gensokioguDict = numbering . map kigou . words
+ 128  
+ 129  kiogu :: String -> String
+ 130  kigou = undefined
+ 131  -}
+ 132  numbering :: [String] -> [(Int, String)]
+ 133  numbering = zip [1 ..]
+ 134  
+ 135  gensokigouDict = map kigou . numbering . words
+ 136  
+ 137  kigou :: (Int, String) -> (Int, String)
+ 138  kigou (i, str)
+ 139      | i == 12     = (i, "Mg")
+ 140      | i `elem` nums = (i, take 1 str)
+ 141      | otherwise   = (i, take 2 str)
+ 142  
+ 143  text1 :: String
+ 144  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 145  
+ 146  nums :: [Int]
+ 147  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 148  
+ 149  -- 05 N-gram
+ 150  bigram :: [a] -> [(a,a)]
+ 151  bigram xs = zip xs (tail xs)
+ 152  
+ 153  text2 :: String
+ 154  text2 = "I am an NLPer"
+ 155  
+ 156  tangoBigram :: [(String, String)]
+ 157  tangoBigram = bigram (words text2)
+ 158  
+ 159  mojiBigram :: [(Char, Char)]
+ 160  mojiBigram = bigram text2
+ 161  
+ 162  -- (a, a) と (a, a, a) は別の型
+ 163  
+ 164  ngram :: Int -> [a] -> [[a]]
+ 165  ngram n xs = transpose (map inits (tails xs)) !! n
+ 166  
+ 167  -- 06 集合
+ 168  
+ 169  str1 :: String
+ 170  str1 = "paraparaparadise"
+ 171  str2 :: String
+ 172  str2 = "paragraph"
+ 173  
+ 174  xs :: [(Char, Char)]
+ 175  xs = bigram str1
+ 176  
+ 177  ys :: [(Char, Char)]
+ 178  ys = bigram str2
+ 179  
+ 180  _X :: Set (Char, Char)
+ 181  _X = Set.fromList xs
+ 182  
+ 183  _Y :: Set (Char, Char)
+ 184  _Y = Set.fromList ys
+ 185  
+ 186  waXY :: Set (Char, Char)
+ 187  waXY = Set.union _X _Y
+ 188  
+ 189  sekiXY :: Set (Char, Char)
+ 190  sekiXY = Set.intersection _X _Y
+ 191  
+ 192  saXY :: Set (Char, Char)
+ 193  saXY = Set.difference _X _Y
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-02T12:09:30</time>
+>>> waXY
+<time>2021-12-02T12:09:34</time>
+fromList [('a','d'),('a','g'),('a','p'),('a','r'),('d','i'),('g','r'),('i','s'),('p','a'),('p','h'),('r','a'),('s','e')]
+<time>2021-12-02T12:09:34</time>
+>>> sekiXY
+<time>2021-12-02T12:10:19</time>
+fromList [('a','p'),('a','r'),('p','a'),('r','a')]
+<time>2021-12-02T12:10:19</time>
+>>> saXY
+<time>2021-12-02T12:10:29</time>
+fromList [('a','d'),('d','i'),('i','s'),('s','e')]
+<time>2021-12-02T12:10:29</time>
+>>> length waXY
+<time>2021-12-02T12:10:52</time>
+11
+<time>2021-12-02T12:10:52</time>
+>>> length sekiXY
+<time>2021-12-02T12:11:02</time>
+4
+<time>2021-12-02T12:11:02</time>
+>>> length xs
+<time>2021-12-02T12:11:13</time>
+15
+<time>2021-12-02T12:11:13</time>
+>>> Set.size waXY
+<time>2021-12-02T12:11:24</time>
+11
+<time>2021-12-02T12:11:24</time>
+>>> Set.size _X
+<time>2021-12-02T12:11:39</time>
+8
+<time>2021-12-02T12:11:39</time>
+>>> Set.member ('s','e') _X
+<time>2021-12-02T12:15:39</time>
+True
+<time>2021-12-02T12:15:39</time>
+>>> Set.member ('s','e') _Y
+<time>2021-12-02T12:15:58</time>
+False
+<time>2021-12-02T12:15:58</time>
+>>> ：q
+<time>2021-12-02T12:20:09</time>
+
+<interactive>:22:1: error: parse error on input ‘：’
+<time>2021-12-02T12:20:09</time>
+>>> :q
+<time>2021-12-02T12:20:11</time>
+Leaving GHCi.
+<time>2021-12-02T12:20:11</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-05T11:40:02</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T11:07:17</time>
+>>> "hoge"
+<time>2021-12-09T11:10:01</time>
+"hoge"
+<time>2021-12-09T11:10:01</time>
+>>> putStrLn "hoge"
+<time>2021-12-09T11:11:05</time>
+hoge
+<time>2021-12-09T11:11:05</time>
+>>> punt "hoge"
+<time>2021-12-09T11:11:52</time>
+
+<interactive>:3:1: error: Variable not in scope: punt :: t0 -> t
+<time>2021-12-09T11:11:52</time>
+>>> print "hoge"
+<time>2021-12-09T11:11:59</time>
+"hoge"
+<time>2021-12-09T11:11:59</time>
+>>> id "hoge"
+<time>2021-12-09T11:12:07</time>
+"hoge"
+<time>2021-12-09T11:12:07</time>
+>>> sentense 12 "気温"
+<time>2021-12-09T11:15:36</time>
+
+<interactive>:6:1: error:
+    • No instance for (Show (Double -> String))
+        arising from a use of ‘Text.Show.Unicode.uprint’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command:
+        Text.Show.Unicode.uprint it
+<time>2021-12-09T11:15:36</time>
+>>> sentense 12 "気温" 22.4
+<time>2021-12-09T11:15:54</time>
+"12時の気温は22.4"
+<time>2021-12-09T11:15:54</time>
+>>> printf "%x" (ord ' ') :: String
+<time>2021-12-09T11:18:39</time>
+
+<interactive>:8:14: error:
+    • Variable not in scope: ord :: Char -> t0
+    • Perhaps you meant one of these:
+        ‘or’ (imported from Prelude), ‘odd’ (imported from Prelude)
+<time>2021-12-09T11:18:39</time>
+>>> import Data.Char
+<time>2021-12-09T11:18:54</time>
+
+<time>2021-12-09T11:18:54</time>
+>>> printf "%x" (ord ' ') :: String
+<time>2021-12-09T11:19:12</time>
+"20"
+<time>2021-12-09T11:19:12</time>
+>>> ord ' '
+<time>2021-12-09T11:19:31</time>
+32
+<time>2021-12-09T11:19:31</time>
+>>> printf "%d" (ord ' ') :: String
+<time>2021-12-09T11:19:54</time>
+"32"
+<time>2021-12-09T11:19:54</time>
+>>> printf "%d %x" 15 :: String
+<time>2021-12-09T11:22:10</time>
+"1*** Exception: printf: argument list ended prematurely
+<time>2021-12-09T11:22:10</time>
+>>> printf "%d" 15 :: String
+<time>2021-12-09T11:22:17</time>
+"15"
+<time>2021-12-09T11:22:17</time>
+>>> printf "%d %x" 15 15:: String
+<time>2021-12-09T11:22:31</time>
+"15 f"
+<time>2021-12-09T11:22:31</time>
+>>> sentense' 12 "湿度" 50.5
+<time>2021-12-09T11:27:41</time>
+
+<interactive>:16:1: error:
+    • Variable not in scope: sentense' :: t2 -> t0 -> t1 -> t
+    • Perhaps you meant ‘sentense’ (line 199)
+<time>2021-12-09T11:27:41</time>
+>>> :e
+<time>2021-12-09T11:27:57</time>
+   1  module Ch01 where
+   2  
+   3  import Data.List ( inits, tails, transpose )
+   4  import Data.Set (Set)
+   5  import qualified Data.Set as Set
+   6  import Text.Printf
+   7  
+   8  -- 00 "stressed" の逆順
+   9  {- |
+  10  >>> ans00
+  11  "desserts"
+  12  -}
+  13  ans00 :: String
+  14  ans00 = reverse "stressed"
+  15  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  16  {- |
+  17  >>> putStrLn omake00
+  18  ぞたけやぶやけた
+  19  -}
+  20  omake00 :: String
+  21  omake00 = reverse "たけやぶやけたぞ"
+  22  
+  23  -- 01. パタトクカシーー
+  24  ans01 :: String
+  25  ans01 =  takeOdds "パタトクカシーー"
+  26  
+  27  {- | 文字列から奇数番目の文字だけとりだす
+  28  >>> putStrLn (takeOdds "パタトクカシーー")
+  29  パトカー
+  30  >>> putStrLn (takeOdds "hogehoge")
+  31  hghg
+  32  -}
+  33  takeOdds :: [a] -> [a]
+  34  takeOdds []     = []
+  35  takeOdds (c:cs) = c : takeEvens cs
+  36  
+  37  {- | リストから偶数番目の要素だけとりだす
+  38  >>> putStrLn (takeEvens "パタトクカシーー")
+  39  タクシー
+  40  -}
+  41  takeEvens :: [a] -> [a]
+  42  takeEvens []     = []
+  43  takeEvens (c:cs) = takeOdds cs
+  44  -- takeEvens (c:[])     = []
+  45  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  46  
+  47  sample :: String
+  48  sample = "パタトクカシーー"
+  49  
+  50  -- 02
+  51  {- |
+  52  >>> putStr $ interleave "パトカー" "タクシー"
+  53  パタトクカシーー
+  54  -}
+  55  interleave :: [a] -> [a] -> [a]
+  56  interleave []     ys = []                   -- (1)
+  57  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  58  {- 
+  59  interleave "はれ" "あめ"
+  60  = {"はれ" = 'は':"れ"}
+  61  interleave ('は' :"れ") "あめ"
+  62  = {(2)}
+  63  'は' : interleave "あめ" "れ"
+  64  = {"あめ" = 'あ':"め"}
+  65  'は' : interleave ('あ':"め") "れ"
+  66  = {(2)}
+  67  'は' : ('あ' =interleave "れ"　"め")
+  68  = {"れ" = 'れ': []}
+  69  'は' : ('あ' : interleave ('れ':[]) "め")
+  70  ={(2)}
+  71  'は' : ('あ' : ('れ' : interleave "め"[])
+  72  =
+  73  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  74  =
+  75  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  76  ={(1)}
+  77  'は' : ('あ' : ('れ' : ('め' : [])))
+  78  =
+  79  'は' ; ('あ' ; ('れ' : "め"))
+  80  =
+  81  'は' : ('あ' : "れめ")
+  82  =
+  83  'は' : "あれめ"
+  84  =
+  85  "はあれめ"
+  86  -}
+  87  
+  88  -- 03 円周率
+  89  {-
+  90  1. '.'と'.'を除く removeCommaAndPerild
+  91  2. 単語に分ける words
+  92  3. 各単語の長さを求める関数lengthを適用
+  93  -}
+  94  samplePi :: String
+  95  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  96  
+  97  wordLengths :: String -> [Int]
+  98  wordLengths = map length . words . removeCommaAndPeriod
+  99  
+ 100  --gonyo :: String -> [Int]
+ 101  --gonyo = monyo . words
+ 102  
+ 103  --monyo :: [String] -> [Int]
+ 104  --monyo = map length
+ 105  
+ 106  {-
+ 107  map f リスト
+ 108  
+ 109  hoge = map toUpper 
+ 110  
+ 111  -}
+ 112  
+ 113  removeCommaAndPeriod :: String -> String
+ 114  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 115  
+ 116  isNotCommaAndNotPeriod :: Char -> Bool
+ 117  isNotCommaAndNotPeriod ',' = False
+ 118  isNotCommaAndNotPeriod '.' = False
+ 119  isNotCommaAndNotPeriod _   = True
+ 120  
+ 121  -- 04 元素記号
+ 122  
+ 123  type Dict = [(Int, String)]
+ 124  
+ 125  gensokigouDict :: String -> Dict
+ 126  gensokioguDict = map kigou . numbering . words
+ 127  {-
+ 128  gensokioguDict = numbering . map kigou . words
+ 129  
+ 130  kiogu :: String -> String
+ 131  kigou = undefined
+ 132  -}
+ 133  numbering :: [String] -> [(Int, String)]
+ 134  numbering = zip [1 ..]
+ 135  
+ 136  gensokigouDict = map kigou . numbering . words
+ 137  
+ 138  kigou :: (Int, String) -> (Int, String)
+ 139  kigou (i, str)
+ 140      | i == 12     = (i, "Mg")
+ 141      | i `elem` nums = (i, take 1 str)
+ 142      | otherwise   = (i, take 2 str)
+ 143  
+ 144  text1 :: String
+ 145  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 146  
+ 147  nums :: [Int]
+ 148  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 149  
+ 150  -- 05 N-gram
+ 151  bigram :: [a] -> [(a,a)]
+ 152  bigram xs = zip xs (tail xs)
+ 153  
+ 154  text2 :: String
+ 155  text2 = "I am an NLPer"
+ 156  
+ 157  tangoBigram :: [(String, String)]
+ 158  tangoBigram = bigram (words text2)
+ 159  
+ 160  mojiBigram :: [(Char, Char)]
+ 161  mojiBigram = bigram text2
+ 162  
+ 163  -- (a, a) と (a, a, a) は別の型
+ 164  
+ 165  ngram :: Int -> [a] -> [[a]]
+ 166  ngram n xs = transpose (map inits (tails xs)) !! n
+ 167  
+ 168  -- 06 集合
+ 169  
+ 170  str1 :: String
+ 171  str1 = "paraparaparadise"
+ 172  str2 :: String
+ 173  str2 = "paragraph"
+ 174  
+ 175  xs :: [(Char, Char)]
+ 176  xs = bigram str1
+ 177  
+ 178  ys :: [(Char, Char)]
+ 179  ys = bigram str2
+ 180  
+ 181  _X :: Set (Char, Char)
+ 182  _X = Set.fromList xs
+ 183  
+ 184  _Y :: Set (Char, Char)
+ 185  _Y = Set.fromList ys
+ 186  
+ 187  waXY :: Set (Char, Char)
+ 188  waXY = Set.union _X _Y
+ 189  
+ 190  sekiXY :: Set (Char, Char)
+ 191  sekiXY = Set.intersection _X _Y
+ 192  
+ 193  saXY :: Set (Char, Char)
+ 194  saXY = Set.difference _X _Y
+ 195  
+ 196  -- 07. テンプレートによる文作成
+ 197  
+ 198  sentense :: Int -> String -> Double -> String
+ 199  sentense x y z = printf "%d時の%sは%f" x y z
+ 200  
+Ok, modules loaded: Ch01.
+<time>2021-12-09T11:27:57</time>
+>>> sentense' 12 "湿度" 50.5
+<time>2021-12-09T11:27:59</time>
+
+<interactive>:18:1: error:
+    • Variable not in scope: sentense' :: t2 -> t0 -> t1 -> t
+    • Perhaps you meant ‘sentense’ (line 199)
+<time>2021-12-09T11:27:59</time>
+>>> sentense' 12 "湿度" 50.5
+<time>2021-12-09T11:29:07</time>
+
+<interactive>:19:1: error:
+    • Variable not in scope: sentense' :: t2 -> t0 -> t1 -> t
+    • Perhaps you meant ‘sentense’ (line 199)
+<time>2021-12-09T11:29:07</time>
+>>> :e
+<time>2021-12-09T11:29:27</time>
+   1  module Ch01 where
+   2  
+   3  import Data.List ( inits, tails, transpose )
+   4  import Data.Set (Set)
+   5  import qualified Data.Set as Set
+   6  import Text.Printf
+   7  
+   8  -- 00 "stressed" の逆順
+   9  {- |
+  10  >>> ans00
+  11  "desserts"
+  12  -}
+  13  ans00 :: String
+  14  ans00 = reverse "stressed"
+  15  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  16  {- |
+  17  >>> putStrLn omake00
+  18  ぞたけやぶやけた
+  19  -}
+  20  omake00 :: String
+  21  omake00 = reverse "たけやぶやけたぞ"
+  22  
+  23  -- 01. パタトクカシーー
+  24  ans01 :: String
+  25  ans01 =  takeOdds "パタトクカシーー"
+  26  
+  27  {- | 文字列から奇数番目の文字だけとりだす
+  28  >>> putStrLn (takeOdds "パタトクカシーー")
+  29  パトカー
+  30  >>> putStrLn (takeOdds "hogehoge")
+  31  hghg
+  32  -}
+  33  takeOdds :: [a] -> [a]
+  34  takeOdds []     = []
+  35  takeOdds (c:cs) = c : takeEvens cs
+  36  
+  37  {- | リストから偶数番目の要素だけとりだす
+  38  >>> putStrLn (takeEvens "パタトクカシーー")
+  39  タクシー
+  40  -}
+  41  takeEvens :: [a] -> [a]
+  42  takeEvens []     = []
+  43  takeEvens (c:cs) = takeOdds cs
+  44  -- takeEvens (c:[])     = []
+  45  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  46  
+  47  sample :: String
+  48  sample = "パタトクカシーー"
+  49  
+  50  -- 02
+  51  {- |
+  52  >>> putStr $ interleave "パトカー" "タクシー"
+  53  パタトクカシーー
+  54  -}
+  55  interleave :: [a] -> [a] -> [a]
+  56  interleave []     ys = []                   -- (1)
+  57  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  58  {- 
+  59  interleave "はれ" "あめ"
+  60  = {"はれ" = 'は':"れ"}
+  61  interleave ('は' :"れ") "あめ"
+  62  = {(2)}
+  63  'は' : interleave "あめ" "れ"
+  64  = {"あめ" = 'あ':"め"}
+  65  'は' : interleave ('あ':"め") "れ"
+  66  = {(2)}
+  67  'は' : ('あ' =interleave "れ"　"め")
+  68  = {"れ" = 'れ': []}
+  69  'は' : ('あ' : interleave ('れ':[]) "め")
+  70  ={(2)}
+  71  'は' : ('あ' : ('れ' : interleave "め"[])
+  72  =
+  73  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  74  =
+  75  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  76  ={(1)}
+  77  'は' : ('あ' : ('れ' : ('め' : [])))
+  78  =
+  79  'は' ; ('あ' ; ('れ' : "め"))
+  80  =
+  81  'は' : ('あ' : "れめ")
+  82  =
+  83  'は' : "あれめ"
+  84  =
+  85  "はあれめ"
+  86  -}
+  87  
+  88  -- 03 円周率
+  89  {-
+  90  1. '.'と'.'を除く removeCommaAndPerild
+  91  2. 単語に分ける words
+  92  3. 各単語の長さを求める関数lengthを適用
+  93  -}
+  94  samplePi :: String
+  95  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  96  
+  97  wordLengths :: String -> [Int]
+  98  wordLengths = map length . words . removeCommaAndPeriod
+  99  
+ 100  --gonyo :: String -> [Int]
+ 101  --gonyo = monyo . words
+ 102  
+ 103  --monyo :: [String] -> [Int]
+ 104  --monyo = map length
+ 105  
+ 106  {-
+ 107  map f リスト
+ 108  
+ 109  hoge = map toUpper 
+ 110  
+ 111  -}
+ 112  
+ 113  removeCommaAndPeriod :: String -> String
+ 114  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 115  
+ 116  isNotCommaAndNotPeriod :: Char -> Bool
+ 117  isNotCommaAndNotPeriod ',' = False
+ 118  isNotCommaAndNotPeriod '.' = False
+ 119  isNotCommaAndNotPeriod _   = True
+ 120  
+ 121  -- 04 元素記号
+ 122  
+ 123  type Dict = [(Int, String)]
+ 124  
+ 125  gensokigouDict :: String -> Dict
+ 126  gensokioguDict = map kigou . numbering . words
+ 127  {-
+ 128  gensokioguDict = numbering . map kigou . words
+ 129  
+ 130  kiogu :: String -> String
+ 131  kigou = undefined
+ 132  -}
+ 133  numbering :: [String] -> [(Int, String)]
+ 134  numbering = zip [1 ..]
+ 135  
+ 136  gensokigouDict = map kigou . numbering . words
+ 137  
+ 138  kigou :: (Int, String) -> (Int, String)
+ 139  kigou (i, str)
+ 140      | i == 12     = (i, "Mg")
+ 141      | i `elem` nums = (i, take 1 str)
+ 142      | otherwise   = (i, take 2 str)
+ 143  
+ 144  text1 :: String
+ 145  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 146  
+ 147  nums :: [Int]
+ 148  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 149  
+ 150  -- 05 N-gram
+ 151  bigram :: [a] -> [(a,a)]
+ 152  bigram xs = zip xs (tail xs)
+ 153  
+ 154  text2 :: String
+ 155  text2 = "I am an NLPer"
+ 156  
+ 157  tangoBigram :: [(String, String)]
+ 158  tangoBigram = bigram (words text2)
+ 159  
+ 160  mojiBigram :: [(Char, Char)]
+ 161  mojiBigram = bigram text2
+ 162  
+ 163  -- (a, a) と (a, a, a) は別の型
+ 164  
+ 165  ngram :: Int -> [a] -> [[a]]
+ 166  ngram n xs = transpose (map inits (tails xs)) !! n
+ 167  
+ 168  -- 06 集合
+ 169  
+ 170  str1 :: String
+ 171  str1 = "paraparaparadise"
+ 172  str2 :: String
+ 173  str2 = "paragraph"
+ 174  
+ 175  xs :: [(Char, Char)]
+ 176  xs = bigram str1
+ 177  
+ 178  ys :: [(Char, Char)]
+ 179  ys = bigram str2
+ 180  
+ 181  _X :: Set (Char, Char)
+ 182  _X = Set.fromList xs
+ 183  
+ 184  _Y :: Set (Char, Char)
+ 185  _Y = Set.fromList ys
+ 186  
+ 187  waXY :: Set (Char, Char)
+ 188  waXY = Set.union _X _Y
+ 189  
+ 190  sekiXY :: Set (Char, Char)
+ 191  sekiXY = Set.intersection _X _Y
+ 192  
+ 193  saXY :: Set (Char, Char)
+ 194  saXY = Set.difference _X _Y
+ 195  
+ 196  -- 07. テンプレートによる文作成
+ 197  
+ 198  sentense :: Int -> String -> Double -> String
+ 199  sentense x y z = printf "%d時の%sは%f" x y z
+ 200  
+ 201  sentense' :: Int -> String -> Double -> String
+ 202  sentense' x y z = show x ++　"時の"　++ y ++ "は" ++ show z
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T11:29:27</time>
+>>> sentense' 12 "湿度" 50.5
+<time>2021-12-09T11:29:29</time>
+"12時の湿度は50.5"
+<time>2021-12-09T11:29:29</time>
+>>> :e
+<time>2021-12-09T11:39:31</time>
+   1  module Ch01 where
+   2  
+   3  import Data.Char
+   4  import Data.List ( inits, tails, transpose )
+   5  import Data.Set (Set)
+   6  import qualified Data.Set as Set
+   7  import Text.Printf
+   8  
+   9  -- 00 "stressed" の逆順
+  10  {- |
+  11  >>> ans00
+  12  "desserts"
+  13  -}
+  14  ans00 :: String
+  15  ans00 = reverse "stressed"
+  16  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  17  {- |
+  18  >>> putStrLn omake00
+  19  ぞたけやぶやけた
+  20  -}
+  21  omake00 :: String
+  22  omake00 = reverse "たけやぶやけたぞ"
+  23  
+  24  -- 01. パタトクカシーー
+  25  ans01 :: String
+  26  ans01 =  takeOdds "パタトクカシーー"
+  27  
+  28  {- | 文字列から奇数番目の文字だけとりだす
+  29  >>> putStrLn (takeOdds "パタトクカシーー")
+  30  パトカー
+  31  >>> putStrLn (takeOdds "hogehoge")
+  32  hghg
+  33  -}
+  34  takeOdds :: [a] -> [a]
+  35  takeOdds []     = []
+  36  takeOdds (c:cs) = c : takeEvens cs
+  37  
+  38  {- | リストから偶数番目の要素だけとりだす
+  39  >>> putStrLn (takeEvens "パタトクカシーー")
+  40  タクシー
+  41  -}
+  42  takeEvens :: [a] -> [a]
+  43  takeEvens []     = []
+  44  takeEvens (c:cs) = takeOdds cs
+  45  -- takeEvens (c:[])     = []
+  46  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  47  
+  48  sample :: String
+  49  sample = "パタトクカシーー"
+  50  
+  51  -- 02
+  52  {- |
+  53  >>> putStr $ interleave "パトカー" "タクシー"
+  54  パタトクカシーー
+  55  -}
+  56  interleave :: [a] -> [a] -> [a]
+  57  interleave []     ys = []                   -- (1)
+  58  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  59  {- 
+  60  interleave "はれ" "あめ"
+  61  = {"はれ" = 'は':"れ"}
+  62  interleave ('は' :"れ") "あめ"
+  63  = {(2)}
+  64  'は' : interleave "あめ" "れ"
+  65  = {"あめ" = 'あ':"め"}
+  66  'は' : interleave ('あ':"め") "れ"
+  67  = {(2)}
+  68  'は' : ('あ' =interleave "れ"　"め")
+  69  = {"れ" = 'れ': []}
+  70  'は' : ('あ' : interleave ('れ':[]) "め")
+  71  ={(2)}
+  72  'は' : ('あ' : ('れ' : interleave "め"[])
+  73  =
+  74  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  75  =
+  76  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  77  ={(1)}
+  78  'は' : ('あ' : ('れ' : ('め' : [])))
+  79  =
+  80  'は' ; ('あ' ; ('れ' : "め"))
+  81  =
+  82  'は' : ('あ' : "れめ")
+  83  =
+  84  'は' : "あれめ"
+  85  =
+  86  "はあれめ"
+  87  -}
+  88  
+  89  -- 03 円周率
+  90  {-
+  91  1. '.'と'.'を除く removeCommaAndPerild
+  92  2. 単語に分ける words
+  93  3. 各単語の長さを求める関数lengthを適用
+  94  -}
+  95  samplePi :: String
+  96  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  97  
+  98  wordLengths :: String -> [Int]
+  99  wordLengths = map length . words . removeCommaAndPeriod
+ 100  
+ 101  --gonyo :: String -> [Int]
+ 102  --gonyo = monyo . words
+ 103  
+ 104  --monyo :: [String] -> [Int]
+ 105  --monyo = map length
+ 106  
+ 107  {-
+ 108  map f リスト
+ 109  
+ 110  hoge = map toUpper 
+ 111  
+ 112  -}
+ 113  
+ 114  removeCommaAndPeriod :: String -> String
+ 115  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 116  
+ 117  isNotCommaAndNotPeriod :: Char -> Bool
+ 118  isNotCommaAndNotPeriod ',' = False
+ 119  isNotCommaAndNotPeriod '.' = False
+ 120  isNotCommaAndNotPeriod _   = True
+ 121  
+ 122  -- 04 元素記号
+ 123  
+ 124  type Dict = [(Int, String)]
+ 125  
+ 126  gensokigouDict :: String -> Dict
+ 127  gensokioguDict = map kigou . numbering . words
+ 128  {-
+ 129  gensokioguDict = numbering . map kigou . words
+ 130  
+ 131  kiogu :: String -> String
+ 132  kigou = undefined
+ 133  -}
+ 134  numbering :: [String] -> [(Int, String)]
+ 135  numbering = zip [1 ..]
+ 136  
+ 137  gensokigouDict = map kigou . numbering . words
+ 138  
+ 139  kigou :: (Int, String) -> (Int, String)
+ 140  kigou (i, str)
+ 141      | i == 12     = (i, "Mg")
+ 142      | i `elem` nums = (i, take 1 str)
+ 143      | otherwise   = (i, take 2 str)
+ 144  
+ 145  text1 :: String
+ 146  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 147  
+ 148  nums :: [Int]
+ 149  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 150  
+ 151  -- 05 N-gram
+ 152  bigram :: [a] -> [(a,a)]
+ 153  bigram xs = zip xs (tail xs)
+ 154  
+ 155  text2 :: String
+ 156  text2 = "I am an NLPer"
+ 157  
+ 158  tangoBigram :: [(String, String)]
+ 159  tangoBigram = bigram (words text2)
+ 160  
+ 161  mojiBigram :: [(Char, Char)]
+ 162  mojiBigram = bigram text2
+ 163  
+ 164  -- (a, a) と (a, a, a) は別の型
+ 165  
+ 166  ngram :: Int -> [a] -> [[a]]
+ 167  ngram n xs = transpose (map inits (tails xs)) !! n
+ 168  
+ 169  -- 06 集合
+ 170  
+ 171  str1 :: String
+ 172  str1 = "paraparaparadise"
+ 173  str2 :: String
+ 174  str2 = "paragraph"
+ 175  
+ 176  xs :: [(Char, Char)]
+ 177  xs = bigram str1
+ 178  
+ 179  ys :: [(Char, Char)]
+ 180  ys = bigram str2
+ 181  
+ 182  _X :: Set (Char, Char)
+ 183  _X = Set.fromList xs
+ 184  
+ 185  _Y :: Set (Char, Char)
+ 186  _Y = Set.fromList ys
+ 187  
+ 188  waXY :: Set (Char, Char)
+ 189  waXY = Set.union _X _Y
+ 190  
+ 191  sekiXY :: Set (Char, Char)
+ 192  sekiXY = Set.intersection _X _Y
+ 193  
+ 194  saXY :: Set (Char, Char)
+ 195  saXY = Set.difference _X _Y
+ 196  
+ 197  -- 07. テンプレートによる文作成
+ 198  
+ 199  sentense :: Int -> String -> Double -> String
+ 200  sentense x y z = printf "%d時の%sは%f" x y z
+ 201  
+ 202  sentense' :: Int -> String -> Double -> String
+ 203  sentense' x y z = show x ++　"時の"　++ y ++ "は" ++ show z
+ 204  
+ 205  -- 08 暗号文
+ 206  
+ 207  cipher :: String -> String
+ 208  cipher = map encode
+ 209  
+ 210  encode :: Char -> Char
+ 211  encode c
+ 212      | isAsciiLower c = chr (219 - ord c)
+ 213      | otherwise      = c
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T11:39:31</time>
+>>> cipher "This is a pen."
+<time>2021-12-09T11:40:50</time>
+"Tsrh rh z kvm."
+<time>2021-12-09T11:40:50</time>
+>>> cipher "b"
+<time>2021-12-09T11:41:49</time>
+"y"
+<time>2021-12-09T11:41:49</time>
+>>> cipher "yui"
+<time>2021-12-09T11:41:58</time>
+"bfr"
+<time>2021-12-09T11:41:58</time>
+>>> cipher "m"
+<time>2021-12-09T11:43:01</time>
+"n"
+<time>2021-12-09T11:43:01</time>
+>>> cipher "n"
+<time>2021-12-09T11:43:11</time>
+"m"
+<time>2021-12-09T11:43:11</time>
+>>> cipher "mama"
+<time>2021-12-09T11:43:21</time>
+"nznz"
+<time>2021-12-09T11:43:21</time>
+>>> cipher "nmnm"
+<time>2021-12-09T11:43:31</time>
+"mnmn"
+<time>2021-12-09T11:43:31</time>
+>>> cipher "Mada, I'm Adam."
+<time>2021-12-09T11:44:28</time>
+"Mzwz, I'n Awzn."
+<time>2021-12-09T11:44:28</time>
+>>> cipher it
+<time>2021-12-09T11:44:46</time>
+"Mada, I'm Adam."
+<time>2021-12-09T11:44:46</time>
+>>> cipher "This is a pen."
+<time>2021-12-09T11:44:54</time>
+"Tsrh rh z kvm."
+<time>2021-12-09T11:44:54</time>
+>>> cipher it
+<time>2021-12-09T11:44:58</time>
+"This is a pen."
+<time>2021-12-09T11:44:58</time>
+>>> :e
+<time>2021-12-09T11:45:14</time>
+   1  module Ch01 where
+   2  
+   3  import Data.Char
+   4  import Data.List ( inits, tails, transpose )
+   5  import Data.Set (Set)
+   6  import qualified Data.Set as Set
+   7  import Text.Printf
+   8  
+   9  -- 00 "stressed" の逆順
+  10  {- |
+  11  >>> ans00
+  12  "desserts"
+  13  -}
+  14  ans00 :: String
+  15  ans00 = reverse "stressed"
+  16  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  17  {- |
+  18  >>> putStrLn omake00
+  19  ぞたけやぶやけた
+  20  -}
+  21  omake00 :: String
+  22  omake00 = reverse "たけやぶやけたぞ"
+  23  
+  24  -- 01. パタトクカシーー
+  25  ans01 :: String
+  26  ans01 =  takeOdds "パタトクカシーー"
+  27  
+  28  {- | 文字列から奇数番目の文字だけとりだす
+  29  >>> putStrLn (takeOdds "パタトクカシーー")
+  30  パトカー
+  31  >>> putStrLn (takeOdds "hogehoge")
+  32  hghg
+  33  -}
+  34  takeOdds :: [a] -> [a]
+  35  takeOdds []     = []
+  36  takeOdds (c:cs) = c : takeEvens cs
+  37  
+  38  {- | リストから偶数番目の要素だけとりだす
+  39  >>> putStrLn (takeEvens "パタトクカシーー")
+  40  タクシー
+  41  -}
+  42  takeEvens :: [a] -> [a]
+  43  takeEvens []     = []
+  44  takeEvens (c:cs) = takeOdds cs
+  45  -- takeEvens (c:[])     = []
+  46  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  47  
+  48  sample :: String
+  49  sample = "パタトクカシーー"
+  50  
+  51  -- 02
+  52  {- |
+  53  >>> putStr $ interleave "パトカー" "タクシー"
+  54  パタトクカシーー
+  55  -}
+  56  interleave :: [a] -> [a] -> [a]
+  57  interleave []     ys = []                   -- (1)
+  58  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  59  {- 
+  60  interleave "はれ" "あめ"
+  61  = {"はれ" = 'は':"れ"}
+  62  interleave ('は' :"れ") "あめ"
+  63  = {(2)}
+  64  'は' : interleave "あめ" "れ"
+  65  = {"あめ" = 'あ':"め"}
+  66  'は' : interleave ('あ':"め") "れ"
+  67  = {(2)}
+  68  'は' : ('あ' =interleave "れ"　"め")
+  69  = {"れ" = 'れ': []}
+  70  'は' : ('あ' : interleave ('れ':[]) "め")
+  71  ={(2)}
+  72  'は' : ('あ' : ('れ' : interleave "め"[])
+  73  =
+  74  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  75  =
+  76  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  77  ={(1)}
+  78  'は' : ('あ' : ('れ' : ('め' : [])))
+  79  =
+  80  'は' ; ('あ' ; ('れ' : "め"))
+  81  =
+  82  'は' : ('あ' : "れめ")
+  83  =
+  84  'は' : "あれめ"
+  85  =
+  86  "はあれめ"
+  87  -}
+  88  
+  89  -- 03 円周率
+  90  {-
+  91  1. '.'と'.'を除く removeCommaAndPerild
+  92  2. 単語に分ける words
+  93  3. 各単語の長さを求める関数lengthを適用
+  94  -}
+  95  samplePi :: String
+  96  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  97  
+  98  wordLengths :: String -> [Int]
+  99  wordLengths = map length . words . removeCommaAndPeriod
+ 100  
+ 101  --gonyo :: String -> [Int]
+ 102  --gonyo = monyo . words
+ 103  
+ 104  --monyo :: [String] -> [Int]
+ 105  --monyo = map length
+ 106  
+ 107  {-
+ 108  map f リスト
+ 109  
+ 110  hoge = map toUpper 
+ 111  
+ 112  -}
+ 113  
+ 114  removeCommaAndPeriod :: String -> String
+ 115  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 116  
+ 117  isNotCommaAndNotPeriod :: Char -> Bool
+ 118  isNotCommaAndNotPeriod ',' = False
+ 119  isNotCommaAndNotPeriod '.' = False
+ 120  isNotCommaAndNotPeriod _   = True
+ 121  
+ 122  -- 04 元素記号
+ 123  
+ 124  type Dict = [(Int, String)]
+ 125  
+ 126  gensokigouDict :: String -> Dict
+ 127  gensokioguDict = map kigou . numbering . words
+ 128  {-
+ 129  gensokioguDict = numbering . map kigou . words
+ 130  
+ 131  kiogu :: String -> String
+ 132  kigou = undefined
+ 133  -}
+ 134  numbering :: [String] -> [(Int, String)]
+ 135  numbering = zip [1 ..]
+ 136  
+ 137  gensokigouDict = map kigou . numbering . words
+ 138  
+ 139  kigou :: (Int, String) -> (Int, String)
+ 140  kigou (i, str)
+ 141      | i == 12     = (i, "Mg")
+ 142      | i `elem` nums = (i, take 1 str)
+ 143      | otherwise   = (i, take 2 str)
+ 144  
+ 145  text1 :: String
+ 146  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 147  
+ 148  nums :: [Int]
+ 149  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 150  
+ 151  -- 05 N-gram
+ 152  bigram :: [a] -> [(a,a)]
+ 153  bigram xs = zip xs (tail xs)
+ 154  
+ 155  text2 :: String
+ 156  text2 = "I am an NLPer"
+ 157  
+ 158  tangoBigram :: [(String, String)]
+ 159  tangoBigram = bigram (words text2)
+ 160  
+ 161  mojiBigram :: [(Char, Char)]
+ 162  mojiBigram = bigram text2
+ 163  
+ 164  -- (a, a) と (a, a, a) は別の型
+ 165  
+ 166  ngram :: Int -> [a] -> [[a]]
+ 167  ngram n xs = transpose (map inits (tails xs)) !! n
+ 168  
+ 169  -- 06 集合
+ 170  
+ 171  str1 :: String
+ 172  str1 = "paraparaparadise"
+ 173  str2 :: String
+ 174  str2 = "paragraph"
+ 175  
+ 176  xs :: [(Char, Char)]
+ 177  xs = bigram str1
+ 178  
+ 179  ys :: [(Char, Char)]
+ 180  ys = bigram str2
+ 181  
+ 182  _X :: Set (Char, Char)
+ 183  _X = Set.fromList xs
+ 184  
+ 185  _Y :: Set (Char, Char)
+ 186  _Y = Set.fromList ys
+ 187  
+ 188  waXY :: Set (Char, Char)
+ 189  waXY = Set.union _X _Y
+ 190  
+ 191  sekiXY :: Set (Char, Char)
+ 192  sekiXY = Set.intersection _X _Y
+ 193  
+ 194  saXY :: Set (Char, Char)
+ 195  saXY = Set.difference _X _Y
+ 196  
+ 197  -- 07. テンプレートによる文作成
+ 198  
+ 199  sentense :: Int -> String -> Double -> String
+ 200  sentense x y z = printf "%d時の%sは%f" x y z
+ 201  
+ 202  sentense' :: Int -> String -> Double -> String
+ 203  sentense' x y z = show x ++　"時の"　++ y ++ "は" ++ show z
+ 204  
+ 205  -- 08 暗号文
+ 206  
+ 207  cipher :: String -> String
+ 208  cipher = map encode
+ 209  
+ 210  encode :: Char -> Char
+ 211  encode c
+ 212      | isAsciiLower c = chr (219 - ord c)
+ 213      | otherwise      = c
+ 214  
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T11:45:14</time>
+>>> cipher "This is a pen."
+<time>2021-12-09T11:45:18</time>
+"Tsrh rh z kvm."
+<time>2021-12-09T11:45:18</time>
+>>> stack build
+<time>2021-12-09T11:57:18</time>
+
+<interactive>:36:1: error: Variable not in scope: stack :: t0 -> t
+
+<interactive>:36:7: error: Variable not in scope: build
+<time>2021-12-09T11:57:18</time>
+>>> :q
+<time>2021-12-09T11:57:26</time>
+Leaving GHCi.
+<time>2021-12-09T11:57:26</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T12:13:09</time>
+>>> :e
+<time>2021-12-09T12:14:06</time>
+   1  module Ch01 where
+   2  
+   3  import Data.Char
+   4  import Data.List ( inits, tails, transpose )
+   5  import Data.Set (Set)
+   6  import qualified Data.Set as Set
+   7  import Text.Printf
+   8  import System.Random.Shuffle
+   9  import Control.Monad.Random hiding (interleave)
+  10  
+  11  -- 00 "stressed" の逆順
+  12  {- |
+  13  >>> ans00
+  14  "desserts"
+  15  -}
+  16  ans00 :: String
+  17  ans00 = reverse "stressed"
+  18  -- reverse :: [a] -> [a] はリストを逆順にするPrelude関数
+  19  {- |
+  20  >>> putStrLn omake00
+  21  ぞたけやぶやけた
+  22  -}
+  23  omake00 :: String
+  24  omake00 = reverse "たけやぶやけたぞ"
+  25  
+  26  -- 01. パタトクカシーー
+  27  ans01 :: String
+  28  ans01 =  takeOdds "パタトクカシーー"
+  29  
+  30  {- | 文字列から奇数番目の文字だけとりだす
+  31  >>> putStrLn (takeOdds "パタトクカシーー")
+  32  パトカー
+  33  >>> putStrLn (takeOdds "hogehoge")
+  34  hghg
+  35  -}
+  36  takeOdds :: [a] -> [a]
+  37  takeOdds []     = []
+  38  takeOdds (c:cs) = c : takeEvens cs
+  39  
+  40  {- | リストから偶数番目の要素だけとりだす
+  41  >>> putStrLn (takeEvens "パタトクカシーー")
+  42  タクシー
+  43  -}
+  44  takeEvens :: [a] -> [a]
+  45  takeEvens []     = []
+  46  takeEvens (c:cs) = takeOdds cs
+  47  -- takeEvens (c:[])     = []
+  48  -- takeEvens (c:(d:ds)) = d : takeEvens ds
+  49  
+  50  sample :: String
+  51  sample = "パタトクカシーー"
+  52  
+  53  -- 02
+  54  {- |
+  55  >>> putStr $ interleave "パトカー" "タクシー"
+  56  パタトクカシーー
+  57  -}
+  58  interleave :: [a] -> [a] -> [a]
+  59  interleave []     ys = []                   -- (1)
+  60  interleave (x:xs) ys = x : interleave ys xs -- (2)
+  61  {- 
+  62  interleave "はれ" "あめ"
+  63  = {"はれ" = 'は':"れ"}
+  64  interleave ('は' :"れ") "あめ"
+  65  = {(2)}
+  66  'は' : interleave "あめ" "れ"
+  67  = {"あめ" = 'あ':"め"}
+  68  'は' : interleave ('あ':"め") "れ"
+  69  = {(2)}
+  70  'は' : ('あ' =interleave "れ"　"め")
+  71  = {"れ" = 'れ': []}
+  72  'は' : ('あ' : interleave ('れ':[]) "め")
+  73  ={(2)}
+  74  'は' : ('あ' : ('れ' : interleave "め"[])
+  75  =
+  76  'は' : ('あ' : ('れ' : interleave ('め';[]) []))
+  77  =
+  78  'は' : ('あ' : ('れ' : ('め' : interleave [] [])))
+  79  ={(1)}
+  80  'は' : ('あ' : ('れ' : ('め' : [])))
+  81  =
+  82  'は' ; ('あ' ; ('れ' : "め"))
+  83  =
+  84  'は' : ('あ' : "れめ")
+  85  =
+  86  'は' : "あれめ"
+  87  =
+  88  "はあれめ"
+  89  -}
+  90  
+  91  -- 03 円周率
+  92  {-
+  93  1. '.'と'.'を除く removeCommaAndPerild
+  94  2. 単語に分ける words
+  95  3. 各単語の長さを求める関数lengthを適用
+  96  -}
+  97  samplePi :: String
+  98  samplePi = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  99  
+ 100  wordLengths :: String -> [Int]
+ 101  wordLengths = map length . words . removeCommaAndPeriod
+ 102  
+ 103  --gonyo :: String -> [Int]
+ 104  --gonyo = monyo . words
+ 105  
+ 106  --monyo :: [String] -> [Int]
+ 107  --monyo = map length
+ 108  
+ 109  {-
+ 110  map f リスト
+ 111  
+ 112  hoge = map toUpper 
+ 113  
+ 114  -}
+ 115  
+ 116  removeCommaAndPeriod :: String -> String
+ 117  removeCommaAndPeriod = filter isNotCommaAndNotPeriod
+ 118  
+ 119  isNotCommaAndNotPeriod :: Char -> Bool
+ 120  isNotCommaAndNotPeriod ',' = False
+ 121  isNotCommaAndNotPeriod '.' = False
+ 122  isNotCommaAndNotPeriod _   = True
+ 123  
+ 124  -- 04 元素記号
+ 125  
+ 126  type Dict = [(Int, String)]
+ 127  
+ 128  gensokigouDict :: String -> Dict
+ 129  gensokioguDict = map kigou . numbering . words
+ 130  {-
+ 131  gensokioguDict = numbering . map kigou . words
+ 132  
+ 133  kiogu :: String -> String
+ 134  kigou = undefined
+ 135  -}
+ 136  numbering :: [String] -> [(Int, String)]
+ 137  numbering = zip [1 ..]
+ 138  
+ 139  gensokigouDict = map kigou . numbering . words
+ 140  
+ 141  kigou :: (Int, String) -> (Int, String)
+ 142  kigou (i, str)
+ 143      | i == 12     = (i, "Mg")
+ 144      | i `elem` nums = (i, take 1 str)
+ 145      | otherwise   = (i, take 2 str)
+ 146  
+ 147  text1 :: String
+ 148  text1 = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+ 149  
+ 150  nums :: [Int]
+ 151  nums = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+ 152  
+ 153  -- 05 N-gram
+ 154  bigram :: [a] -> [(a,a)]
+ 155  bigram xs = zip xs (tail xs)
+ 156  
+ 157  text2 :: String
+ 158  text2 = "I am an NLPer"
+ 159  
+ 160  tangoBigram :: [(String, String)]
+ 161  tangoBigram = bigram (words text2)
+ 162  
+ 163  mojiBigram :: [(Char, Char)]
+ 164  mojiBigram = bigram text2
+ 165  
+ 166  -- (a, a) と (a, a, a) は別の型
+ 167  
+ 168  ngram :: Int -> [a] -> [[a]]
+ 169  ngram n xs = transpose (map inits (tails xs)) !! n
+ 170  
+ 171  -- 06 集合
+ 172  
+ 173  str1 :: String
+ 174  str1 = "paraparaparadise"
+ 175  str2 :: String
+ 176  str2 = "paragraph"
+ 177  
+ 178  xs :: [(Char, Char)]
+ 179  xs = bigram str1
+ 180  
+ 181  ys :: [(Char, Char)]
+ 182  ys = bigram str2
+ 183  
+ 184  _X :: Set (Char, Char)
+ 185  _X = Set.fromList xs
+ 186  
+ 187  _Y :: Set (Char, Char)
+ 188  _Y = Set.fromList ys
+ 189  
+ 190  waXY :: Set (Char, Char)
+ 191  waXY = Set.union _X _Y
+ 192  
+ 193  sekiXY :: Set (Char, Char)
+ 194  sekiXY = Set.intersection _X _Y
+ 195  
+ 196  saXY :: Set (Char, Char)
+ 197  saXY = Set.difference _X _Y
+ 198  
+ 199  -- 07. テンプレートによる文作成
+ 200  
+ 201  sentense :: Int -> String -> Double -> String
+ 202  sentense x y z = printf "%d時の%sは%f" x y z
+ 203  
+ 204  sentense' :: Int -> String -> Double -> String
+ 205  sentense' x y z = show x ++　"時の"　++ y ++ "は" ++ show z
+ 206  
+ 207  -- 08 暗号文
+ 208  
+ 209  cipher :: String -> String
+ 210  cipher = map encode
+ 211  
+ 212  encode :: Char -> Char
+ 213  encode c
+ 214      | isAsciiLower c = chr (219 - ord c)
+ 215      | otherwise      = c
+ 216  
+ 217  -- Typoglycemia
+ 218  
+ 219  sample2 :: String
+ 220  sample2 = "I couldn’t believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
+ 221  
+ 222  typoglycemia :: String -> String
+ 223  typoglycemia = unwords . map typo . words
+ 224  
+ 225  typo :: String -> String
+ 226  typo w
+ 227      | len < 5      = w
+ 228      | otherwise    = [h] ++ shuffle' ms len' (mkStdGen len') ++ [t]
+ 229      where
+ 230          len = length w
+ 231          len' = len - 2
+ 232          h = head w
+ 233          t = last w
+ 234          ms = take len' (tail w )
+ 235  
+[1 of 1] Compiling Ch01             ( src/Ch01.hs, interpreted )
+Ok, modules loaded: Ch01.
+<time>2021-12-09T12:14:06</time>
+>>> typo "eocipecldmia"
+<time>2021-12-09T12:15:01</time>
+"ecpildcemoia"
+<time>2021-12-09T12:15:01</time>
+>>> typoglycemia sample2
+<time>2021-12-09T12:15:47</time>
+"I con’ldut beveile that I culod aclluaty uanrdetsnd what I was rinedag : the pnaoenemhl pweor of the hmaun mind ."
+<time>2021-12-09T12:15:47</time>
+>>> :q
+<time>2021-12-09T12:16:37</time>
+Leaving GHCi.
+<time>2021-12-09T12:16:37</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2022-01-13T11:24:02</time>
+>>> interact id
+<time>2022-01-13T11:24:12</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2022-01-13T11:24:25</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+[1 of 1] Compiling Ch02             ( src/Ch02.hs, interpreted )
+Ok, modules loaded: Ch02.
+<time>2022-01-13T11:33:24</time>
+>>> testString2 = "areare hoge/nsoresore huga/n"
+<time>2022-01-13T11:39:00</time>
+
+<time>2022-01-13T11:39:00</time>
+>>> putStr testString2
+<time>2022-01-13T11:39:09</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+<time>2022-01-13T11:39:23</time>
+>>> :q
+<time>2022-01-13T11:44:02</time>
+Leaving GHCi.
+<time>2022-01-13T11:44:02</time>
+GHCi, version 8.10.7: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/fukatayui/a1prog2021/.ghci
+
+<no location info>: error: can't find file: app/0200/Main.hs
+Failed, modules loaded: none.
+<time>2022-01-13T11:53:32</time>
+>>> :q
+<time>2022-01-13T12:07:41</time>
+Leaving GHCi.
+<time>2022-01-13T12:07:41</time>
